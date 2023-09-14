@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -15,7 +18,9 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+
+        $apartments = Apartment::where('user_id', Auth::id())->get();
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -25,7 +30,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.apartments.create');
     }
 
     /**
@@ -36,7 +41,17 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $form_data = $request->all();
+        $form_data['user_id'] = Auth::id();
+
+        $apartment = new Apartment();
+
+        $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
+        $apartment->fill($form_data);
+
+        $apartment->save();
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
@@ -58,7 +73,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -70,7 +85,21 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $form_data = $request->all();
+        
+        if($request->hasFile('img')){
+            if($apartment->img){
+                Storage::delete($apartment->img);
+            }
+            
+            $path = Storage::put('apartments-img', $request->img);
+            $form_data['img'] = $path;
+        }
+        
+        $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
+        $apartment->update($form_data);
+        
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
@@ -81,6 +110,13 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+
+       
+        if($apartment->img){
+            Storage::delete($apartment->img);
+        }
+            
+        $apartment->delete();
+        return redirect()->route('admin.apartments.index');
     }
 }
