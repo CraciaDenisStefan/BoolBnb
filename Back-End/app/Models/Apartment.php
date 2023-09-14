@@ -10,7 +10,7 @@ use App\Models\User;
 class Apartment extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','slug','n_rooms','n_beds','n_bathrooms','mq','address','latitude','longitude','img','price','user_id', 'visible'];
+    protected $fillable = ['title','slug','n_rooms','n_beds','n_bathrooms','mq','address','latitude','longitude','img','description','price','user_id', 'visible'];
 
     public static function generateSlug($title)
     {
