@@ -30,7 +30,7 @@
                         </div>
                         <div class="class-group">
                             <label class="control-label">Numero stanze</label>
-                            <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') }}">
+                            <input type="number" id="n_rooms" min="1" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') }}">
                             @error('n_rooms')
                                 <div class="text-danger"> {{ $message }} </div>
                             @enderror

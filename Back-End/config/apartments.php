@@ -2,7 +2,7 @@
 return [
 
     [
-        'user_id' => 1,
+        'user_id' => 3,
         'title' => 'Appartamento spazioso in centro',
         'slug' => 'appartamento-spazioso',
         'n_rooms' => 3,
@@ -50,7 +50,7 @@ return [
         'visible' => true,
     ],
     [
-        'user_id' => 1,
+        'user_id' => 3,
         'title' => 'Appartamento rustico in campagna',
         'slug' => 'appartamento-rustico',
         'n_rooms' => 4,
@@ -66,7 +66,7 @@ return [
         'visible' => true,
     ],
     [
-        'user_id' => 1,
+        'user_id' => 3,
         'title' => 'Appartamento di lusso in centro',
         'slug' => 'appartamento-lusso',
         'n_rooms' => 4,

@@ -26,8 +26,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Slug</th>
-                <th scope="col">Specie</th>
-                <th scope="col "><span class="">Utiliti</span></th>
+                <th scope="col">Prezzo</th>
               </tr>
             </thead>
             <tbody>
