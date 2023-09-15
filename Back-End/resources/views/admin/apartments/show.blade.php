@@ -26,8 +26,8 @@
                       Informazioni:
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item"><i class="fa-solid fa-bed"></i> <strong>Stanze </strong> {{$apartment->n_rooms}}</li>
-                      <li class="list-group-item"><i class="fa-solid fa-circle-user"></i> <strong>Posti letti </strong> {{$apartment->n_beds}}</li>
+                      <li class="list-group-item"><i class="fa-solid fa-door-open"></i> <strong>Stanze </strong> {{$apartment->n_rooms}}</li>
+                      <li class="list-group-item"><i class="fa-solid fa-bed"></i></i> <strong>Posti letti </strong> {{$apartment->n_beds}}</li>
                       <li class="list-group-item "><i class="fa-solid fa-toilet-paper"></i> <strong>Bagni </strong> {{$apartment->n_bathrooms}}</li>
                       <li class="list-group-item"><i class="fa-solid fa-sack-dollar"></i> <strong>Prezzo </strong> {{$apartment->price}} &euro;</li>
                       <li class="list-group-item"><i class="fa-solid fa-ruler-combined"></i>  {{$apartment->mq}} mq</li>

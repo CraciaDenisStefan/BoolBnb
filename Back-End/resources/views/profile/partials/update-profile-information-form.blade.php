@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-secondary">
-            {{ __('Profile Information') }}
+            {{ __('Informazioni Profilo') }}
         </h2>
 
         <p class="mt-1 text-muted">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Aggiorna le informazioni del profilo e l'indirizzo email del tuo account.") }}
         </p>
     </header>
 
@@ -23,6 +23,15 @@
             @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->get('name')}}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="mb-2">
+            <label for="surname">{{__('Cognome')}}</label>
+            <input class="form-control" type="text" name="surname" id="surname" autocomplete="surname" value="{{old('surname', $user->surname)}}"  autofocus>
+            @error('surname')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->get('surname')}}</strong>
             </span>
             @enderror
         </div>
@@ -60,7 +69,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-4">
-            <button class="btn btn-primary" type="submit">{{ __('Save') }}</button>
+            <button class="btn btn-primary" type="submit">{{ __('Salva') }}</button>
 
             @if (session('status') === 'profile-updated')
             <script>
