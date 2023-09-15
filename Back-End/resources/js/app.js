@@ -5,21 +5,27 @@ import.meta.glob([
     '../img/**'
 ])
 
-// Ottieni l'elemento HTML con id 'description'
-let descriptElement = document.getElementById('description');
+// Seleziona tutti gli elementi con la classe "truncate-text"
+let descriptElements = document.querySelectorAll('.truncate-text');
 
-// Estrai il testo dall'elemento
-let descript = descriptElement.textContent;
+// Specifica il numero massimo di caratteri
+let maxLength = 50;
 
-function truncateText(descript) {
-    if (descript.length > 50) {
-        return descript.substr(0, 50) + '...';
+// Itera su tutti gli elementi e applica la funzione a ciascuno
+descriptElements.forEach(function (descriptElement) {
+    let descript = descriptElement.textContent;
+
+    // Controlla se la lunghezza del testo supera il numero massimo di caratteri
+    if (descript.length > maxLength) {
+        // Tronca il testo alla lunghezza massima
+        descript = descript.substr(0, maxLength) + '...';
     }
-    return descript;
-}
 
-// Utilizza la funzione per abbreviare il testo
-let truncatedDescription = truncateText(descript);
+    // Assegna il testo troncato all'elemento HTML
+    descriptElement.textContent = descript;
+});
 
-// Assegna il testo abbreviato all'elemento HTML
-descriptElement.textContent = truncatedDescription;
+
+
+
+

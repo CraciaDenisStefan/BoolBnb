@@ -39,7 +39,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{$apartment->title}}</h5>
-                  <p class="card-text" id="description">{{$apartment->description}}</p>
+                  <p class="card-text truncate-text" >{{$apartment->description}}</p>
                   <p class="card-text">
                     <div class="d-flex ">
                       <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
