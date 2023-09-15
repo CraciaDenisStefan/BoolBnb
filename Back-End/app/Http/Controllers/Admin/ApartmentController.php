@@ -108,6 +108,26 @@ class ApartmentController extends Controller
     {
         $form_data = $request->all();
         
+         // Effettua una chiamata API per ottenere le coordinate
+         $address = urlencode($form_data['address']);
+         $apiKey = config('services.tomtom.key'); // Assicurati di avere configurato la chiave di TomTom nei tuoi servizi
+ 
+         $apiUrl = "https://api.tomtom.com/search/2/geocode/%7B$address%7D.json?key={$apiKey}";
+ 
+         try{
+             $response = file_get_contents($apiUrl);
+             $data = json_decode($response, true);
+     
+             if($data && isset($data['results'][0]['position'])){
+                 $coordinates = $data['results'][0]['position'];
+                 $form_data['latitude'] = $coordinates['lat'];
+                 $form_data['longitude'] = $coordinates['lon'];
+             }
+         }catch(\Exception $e) {
+             // Gestisci eventuali errori nella chiamata API o nella decodifica JSON
+             // ...
+         }
+
         if($request->hasFile('img')){
             if($apartment->img){
                 Storage::delete($apartment->img);
