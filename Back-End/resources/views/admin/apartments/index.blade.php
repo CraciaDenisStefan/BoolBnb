@@ -7,10 +7,10 @@
     <div class="col-12 col-sm-6 col-md-3 py-5 w-100">
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <a href="{{route('admin.apartments.create')}}" class="btn btn-primary">Aggiungi un appartamento</a>
+          <a href="{{route('admin.dashboard')}}" class="btn primary-colour">Torna alla dashboard</a>
         </div>
         <div>
-          <a href="{{route('admin.dashboard')}}" class="btn btn-primary">Torna alla dashboard</a>
+          <a href="{{route('admin.apartments.create')}}" class="btn primary-colour">Aggiungi un appartamento</a>
         </div>
       </div>
     </div>

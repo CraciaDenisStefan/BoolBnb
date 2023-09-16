@@ -5,6 +5,7 @@
     min-height: 200px;
 
 }
+
 .background_index::before{
     content: "";
     position: fixed;
@@ -17,4 +18,16 @@
     background-repeat: no-repeat;
     background-size: cover;
     z-index: -1;  
+}
+
+.primary-colour-home{
+    background-color: #d77d85;
+}
+
+.primary-colour{
+    background-color: #d77d85;
+}
+
+.primary-colour:hover{
+    background-color: #d77981;
 }
