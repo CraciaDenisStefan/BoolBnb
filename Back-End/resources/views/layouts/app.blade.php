@@ -27,7 +27,7 @@
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
                     <div class="logo">
-                        <img class="logo-img" src="/images/boolbnb.png" alt="boolbnb">
+                        <img class="logo-img" src="/images/boolbnb.png" alt="boolbnb"> <strong><em>BoolBnB</em></strong>
                     </div>
 
                 </a>

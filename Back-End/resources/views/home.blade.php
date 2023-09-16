@@ -21,15 +21,12 @@
                         <li>Clicca su "Aggiungi il tuo appartamento".</li>
                         <li>Compila il modulo con i dettagli del tuo appartamento.</li>
                         <li>Carica le immagini e scegli un prezzo.</li>
-                        <li>Una volta verificato, il tuo appartamento sarà visibile agli utenti.</li>
                     </ol>
                 </div>
                 <div class="col-md-6">
                     <h2>Vantaggi</h2>
                     <ul>
                         <li>Raggiungi una vasta audience di potenziali ospiti.</li>
-                        <li>Gestisci le prenotazioni e le recensioni degli ospiti.</li>
-                        <li>Guadagna condividendo il tuo spazio.</li>
                         <li>Offri un'esperienza unica ai tuoi ospiti.</li>
                     </ul>
                 </div>
