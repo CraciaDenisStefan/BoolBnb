@@ -10,6 +10,9 @@
           <a href="{{route('admin.dashboard')}}" class="btn primary-colour">Torna alla dashboard</a>
         </div>
         <div>
+        <a href="{{route('admin.services.index')}}" class="btn primary-colour">Visualizza servizi</a>
+        </div>
+        <div>
           <a href="{{route('admin.apartments.create')}}" class="btn primary-colour">Aggiungi un appartamento</a>
         </div>
       </div>
@@ -17,6 +20,11 @@
   </div>
       
   <div class="container">
+    @if($message != '')
+      <div class="alert alert-success">
+          {{ $message }}
+      </div>
+    @endif
     <div>
       <h3>I tuoi appartamenti</h3>
     </div>
@@ -44,10 +52,10 @@
                     <div class="d-flex ">
                       <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
                       <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <form class="form-delete" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                      <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button data-apartment-title="{{ $apartment->title }}" type="submit" class="btn btn-sm btn-danger">
                           <i class="fa-solid fa-trash-can"></i>
                         </button>
                       </form>
@@ -62,5 +70,5 @@
     </div>
   </div>
 </div>
-  
+@include('admin.partials.modal_delete')
 @endsection

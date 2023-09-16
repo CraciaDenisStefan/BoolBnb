@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Service;
+use App\Models\Apartment;
+
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\Apartment;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
-use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -16,11 +18,19 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
+        $datas = $request->all();
+
+        if(isset($datas['message'])){
+            $message = $datas['message'];
+        }else{
+            $message = '';
+        }
+
         $apartments = Apartment::where('user_id', Auth::id())->get();
-        return view('admin.apartments.index', compact('apartments'));
+        return view('admin.apartments.index', compact('apartments', 'message'));
     }
 
     /**
@@ -30,7 +40,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -72,7 +83,13 @@ class ApartmentController extends Controller
 
         $apartment->save();
 
-        return redirect()->route('admin.apartments.index');
+        if($request->has('services')){
+            $services = $request->input('services');
+            $apartment->technologies()->attach($services);
+        }
+
+        $message = 'Creazione appartamneto completata';
+        return redirect()->route('admin.apartments.index', ['message' => $message]);
     }
 
     /**
@@ -94,7 +111,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('admin.apartments.edit', compact('apartment'));
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -136,11 +154,19 @@ class ApartmentController extends Controller
             $path = Storage::put('apartments-img', $request->img);
             $form_data['img'] = $path;
         }
+
+        if($request->has('services')) {
+            $services = $request->input('services');
+            $apartment->services()->sync($services);
+        }else{
+            $apartment->services()->detach(); // Rimuovi tutte le associazioni se non ci sono tecnologie selezionate
+        }
         
         $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
         $apartment->update($form_data);
         
-        return redirect()->route('admin.apartments.index');
+        $message = 'Aggiornamento appartamento completato';
+        return redirect()->route('admin.apartments.index', ['message' => $message]);
     }
 
     /**
@@ -156,8 +182,11 @@ class ApartmentController extends Controller
         if($apartment->img){
             Storage::delete($apartment->img);
         }
+
+        $apartment->services()->detach();
             
         $apartment->delete();
-        return redirect()->route('admin.apartments.index');
+        $message = 'Cancellazione appartamento completata';
+        return redirect()->route('admin.apartments.index', ['message' => $message]);
     }
 }
