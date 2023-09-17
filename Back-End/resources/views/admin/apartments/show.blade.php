@@ -40,7 +40,7 @@
                                     @endforeach
                                 </ul>
                             @else
-                                <p>Nessuna tecnologia associata a questo progetto.</p>
+                                <p>Nessun servizio.</p>
                             @endif
                         </li>
                     </ul>

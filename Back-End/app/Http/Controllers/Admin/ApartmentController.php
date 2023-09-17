@@ -84,8 +84,7 @@ class ApartmentController extends Controller
         $apartment->save();
 
         if($request->has('services')){
-            $services = $request->input('services');
-            $apartment->technologies()->attach($services);
+            $apartment->services()->attach($request->services);
         }
 
         $message = 'Creazione appartamneto completata';
@@ -159,7 +158,7 @@ class ApartmentController extends Controller
             $services = $request->input('services');
             $apartment->services()->sync($services);
         }else{
-            $apartment->services()->detach(); // Rimuovi tutte le associazioni se non ci sono tecnologie selezionate
+            $apartment->services()->detach();
         }
         
         $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
