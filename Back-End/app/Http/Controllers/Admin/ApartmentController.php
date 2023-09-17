@@ -83,8 +83,9 @@ class ApartmentController extends Controller
 
         $apartment->save();
 
-        if($request->has('services')){
-            $apartment->services()->attach($request->services);
+        if($request->has('service')){
+            $service = $request->input('service');
+            $apartment->services()->attach($service);
         }
 
         $message = 'Creazione appartamneto completata';
