@@ -32,7 +32,7 @@ const deleteButton = document.querySelectorAll('.delete-apartment-form button[ty
 deleteButton.forEach((button) => {
 
     //AD OGNI PULSANTE GLI DICO DI RIMANERE IN ATTESA DI UN EVENTO CLICK. IMPORTANTISSIMO
-    button.addEventListener('click', (event) =>{
+    button.addEventListener('click', (event) => {
         event.preventDefault();
 
         //RECUPER L'HTML DELLA MODALE
@@ -63,4 +63,17 @@ deleteButton.forEach((button) => {
 });
 
 
+// Seleziona l'header
+const header = document.getElementById('myHeader');
+
+// Aggiungi un gestore di eventi alla finestra per rilevare lo scroll
+window.addEventListener('scroll', function () {
+    // Se lo scroll supera una certa soglia, aggiungi la classe per il background bianco
+    if (window.scrollY > 1) {
+        header.classList.add('header-scrolled');
+    } else {
+        // Altrimenti, rimuovi la classe per tornare al background trasparente
+        header.classList.remove('header-scrolled');
+    }
+});
 

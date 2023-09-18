@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="background_index">
-        <div class="container card-container-AuthLoginRegister mt-5">
+        <div class="container card-container-AuthLoginRegister mt-5 pb-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card shadow-lg">

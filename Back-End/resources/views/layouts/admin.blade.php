@@ -23,7 +23,7 @@
     <div id="app">
 
 
-        <header class="p-0 navbar navbar-expand-md">
+        <header id="myHeader" class="p-0 navbar navbar-expand-md fixed-top">
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
                     <div class="logo">
@@ -92,7 +92,7 @@
             </div>
         </header>
 
-        <main class="">
+        <main class="margin-top-header">
             @yield('content')
         </main>
     </div>
@@ -101,6 +101,17 @@
 </html>
 
 <style>
+
+    #myHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    }
+    .header-scrolled {
+        background-color: white;
+    }
 
     .logo{
         cursor: pointer;
@@ -119,6 +130,10 @@
     }
     main{
         min-height: calc(100vh - 210px);
+    }
+
+    .margin-top-header {
+        margin-top: 100px;
     }
 
 </style>

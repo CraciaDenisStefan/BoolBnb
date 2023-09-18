@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="background_index">
     <div class="container mt-4">
         @if($message != '')
         <div class="alert alert-success">
@@ -24,13 +25,13 @@
             </div>
             <div class="col-12 col-md-6">
                 @if($apartment->img)
-                    <img class="img-fluid w-100 h-100" src="{{ asset('storage/'. $apartment->img) }}">
+                    <img class="img-fluid w-100 h-100 shadow-lg" src="{{ asset('storage/'. $apartment->img) }}">
                 @else
-                    <img class="img-fluid w-100 h-100" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png">
+                    <img class="img-fluid w-100 h-100 shadow-lg" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png">
                 @endif
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-                <div class="card my-4" style="width: 18rem;">
+                <div class="card my-4 shadow-lg" style="width: 18rem;">
                     <div class="card-header">
                       Informazioni:
                     </div>
@@ -79,8 +80,11 @@
                 </div>
             </div>
             <hr class="my-3">
-            <p>{{ $apartment->description }}</p>
+            <div class="card p-3 shadow-lg mb-5">
+                <p>{{ $apartment->description }}</p>
+            </div>
         </div>
     </div>
+</div>
 @include('admin.partials.modal_delete')
 @endsection

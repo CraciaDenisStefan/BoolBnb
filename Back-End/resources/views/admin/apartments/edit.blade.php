@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 my-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Inserisci un nuovo appartamneto</h2>
+                    <h2>Modifica Appartamento</h2>
                     <a href=" {{ route('admin.apartments.index')}} " class="btn primary-colour">Tutte le proprietà</a>
                 </div>
                 <div>
