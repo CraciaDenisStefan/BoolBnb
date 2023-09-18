@@ -24,7 +24,7 @@
             </div>
             <div class="col-12 col-md-6">
                 @if($apartment->img)
-                    <img class="img-fluid" src="{{ asset('storage/'. $apartment->img) }}">
+                    <img class="img-fluid w-100 h-100" src="{{ asset('storage/'. $apartment->img) }}">
                 @else
                     <img class="img-fluid w-100 h-100" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png">
                 @endif
