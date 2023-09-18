@@ -35,13 +35,13 @@
             <div class="row g-0">
               <div class="col-md-4">
                 @if($apartment->img)
-                <div class="card-img my_card"
-                  style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center; height: 100%;">
-                </div>
+                  <div class="card-img my_card"
+                    style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center; height: 100%;">
+                  </div>
                 @else
-                <div class="card-img my_card"
-                style="background-image: url('https://cdn.garneroarredamenti.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/1/0/10241_166253_cucina_completa_moderna_shabby_componibile_240cm_bianca_rovere_oxford-9.1686601425.jpg'); background-size: cover; background-position: center; height: 100%;">
-              </div>
+                  <div class="card-img my_card"
+                    style="background-image: url('https://cdn.garneroarredamenti.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/1/0/10241_166253_cucina_completa_moderna_shabby_componibile_240cm_bianca_rovere_oxford-9.1686601425.jpg'); background-size: cover; background-position: center; height: 100%;">
+                  </div>
                 @endif
               </div>
               <div class="col-md-8">

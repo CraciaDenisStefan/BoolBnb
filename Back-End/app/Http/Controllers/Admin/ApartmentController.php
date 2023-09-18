@@ -78,14 +78,19 @@ class ApartmentController extends Controller
 
         $apartment = new Apartment();
 
+        if($request->hasFile('img')){
+            $path = Storage::put('apartments-img', $request->img);
+            $form_data['img'] = $path;
+        }
+
         $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
         $apartment->fill($form_data);
 
         $apartment->save();
 
-        if($request->has('services')){
-            $services = $request->input('services');
-            $apartment->technologies()->attach($services);
+        if($request->has('service')){
+            $services = $request->input('service');
+            $apartment->services()->attach($services);
         }
 
         $message = 'Creazione appartamneto completata';
