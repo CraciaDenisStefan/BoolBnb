@@ -103,9 +103,17 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Apartment $apartment, Request $request)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $datas = $request->all();
+
+        if(isset($datas['message'])){
+            $message = $datas['message'];
+        }else{
+            $message = '';
+        }
+
+        return view('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**
@@ -171,7 +179,7 @@ class ApartmentController extends Controller
         $apartment->update($form_data);
         
         $message = 'Aggiornamento appartamento completato';
-        return redirect()->route('admin.apartments.index', ['message' => $message]);
+        return redirect()->route('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**

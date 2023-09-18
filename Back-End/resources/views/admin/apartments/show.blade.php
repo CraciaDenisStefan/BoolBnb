@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container mt-4">
+        @if($message != '')
+        <div class="alert alert-success">
+            {{ $message }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-12  my-5">
                 <div class="d-md-flex justify-content-md-between align-items-md-start">
@@ -48,6 +53,20 @@
                             @endif
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form class="form-delete" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST" onsubmit="return confirm('Sei sicuro di voler cancellare l\'appartamento?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <hr class="my-3">
