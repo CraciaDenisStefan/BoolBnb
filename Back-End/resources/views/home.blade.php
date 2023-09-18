@@ -2,7 +2,7 @@
 @section('content')
     <div class="background_index">
         <div class="container text-center my-5">
-            <div class="jumbotron primary-colour-home text-white rounded-lg p-5 rounded">
+            <div class="jumbotron primary-colour-home text-white rounded-lg p-5 rounded shadow-lg">
                 <h1 class="display-4">Mettilo in evidenza!</h1>
                 <p class="lead">Hai un appartamento che vuoi condividere con gli altri? Mettilo sul nostro sito!</p>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-light btn-lg">Aggiungi il tuo appartamento</a>

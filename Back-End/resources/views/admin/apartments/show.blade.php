@@ -10,7 +10,7 @@
                         <h5>{{$apartment->address}}</h5>
                     </div>
                     <div class="mt-4 mt-md-0">
-                        <a href="{{route('admin.apartments.index')}}" class="btn btn-primary mt-1">Torna ai tuoi appartamenti</a>
+                        <a href="{{route('admin.apartments.index')}}" class="btn primary-colour mt-1">Torna ai tuoi appartamenti</a>
                     </div>
                     
                 </div>
@@ -18,7 +18,11 @@
                 
             </div>
             <div class="col-12 col-md-6">
-                <img class="img-fluid" src="{{ asset('storage/'. $apartment->img) }}" alt="Immagine non disponibile">
+                @if($apartment->img)
+                    <img class="img-fluid" src="{{ asset('storage/'. $apartment->img) }}">
+                @else
+                    <img class="img-fluid w-100 h-100" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png">
+                @endif
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
                 <div class="card my-4" style="width: 18rem;">
