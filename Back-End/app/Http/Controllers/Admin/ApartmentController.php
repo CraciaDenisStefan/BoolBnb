@@ -88,8 +88,8 @@ class ApartmentController extends Controller
 
         $apartment->save();
 
-        if($request->has('service')){
-            $services = $request->input('service');
+        if($request->has('services')){
+            $services = $request->input('services');
             $apartment->services()->attach($services);
         }
 
