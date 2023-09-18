@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Service;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Apartment extends Model
 {
@@ -18,5 +19,9 @@ class Apartment extends Model
     }
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function services() {
+        return $this->belongsToMany(Service::class);
     }
 }

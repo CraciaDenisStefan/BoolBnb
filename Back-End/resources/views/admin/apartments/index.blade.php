@@ -17,6 +17,11 @@
   </div>
       
   <div class="container">
+    @if($message != '')
+      <div class="alert alert-success">
+          {{ $message }}
+      </div>
+    @endif
     <div>
       <h3>I tuoi appartamenti</h3>
     </div>
@@ -27,13 +32,13 @@
             <div class="row g-0">
               <div class="col-md-4">
                 @if($apartment->img)
-                <div class="card-img my_card"
-                  style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center; height: 100%;">
-                </div>
+                  <div class="card-img my_card shadow-lg"
+                    style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center; height: 100%;">
+                  </div>
                 @else
-                <div class="card-img my_card"
-                style="background-image: url('https://cdn.garneroarredamenti.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/1/0/10241_166253_cucina_completa_moderna_shabby_componibile_240cm_bianca_rovere_oxford-9.1686601425.jpg'); background-size: cover; background-position: center; height: 100%;">
-              </div>
+                  <div class="card-img my_card"
+                    style="background-image: url('https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png'); background-size: cover; background-position: center; height: 100%;">
+                  </div>
                 @endif
               </div>
               <div class="col-md-8">
@@ -44,10 +49,10 @@
                     <div class="d-flex ">
                       <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
                       <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <form class="form-delete" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                      <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button data-apartment-title="{{ $apartment->title }}" type="submit" class="btn btn-sm btn-danger">
                           <i class="fa-solid fa-trash-can"></i>
                         </button>
                       </form>
@@ -62,5 +67,5 @@
     </div>
   </div>
 </div>
-  
+@include('admin.partials.modal_delete')
 @endsection

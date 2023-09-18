@@ -85,7 +85,21 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="d-flex flex-wrap justify-content-between mt-4">
+                        <div class="form-group my-4">
+                            <label class="control-label my-2">Servizi:</label>
+                            <div class="d-flex flex-wrap">
+                                @foreach($services as $service)
+                                    <div class="form-check ms-2">
+                                        <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input @error('services') is-invalid @enderror"
+                                        @if(in_array($service->id, $apartment->services->pluck('id')->toArray())) checked @endif>
+                                        <label class="form-check-label">{{ $service->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('services')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12 col-sm-6">
                             <p class="mt-3 ms-0">Visibile</p>
                             <div class="d-flex">

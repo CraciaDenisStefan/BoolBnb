@@ -5,7 +5,7 @@
         <div class="container card-container-AuthLoginRegister mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card shadow-lg">
                         <div class="card-header text-center bg-custom text-uppercase font-weight-bold">Ti diamo il benvenuto su BoolBnB</div>
                         <img class="card-img-top" src="https://a0.muscache.com/im/pictures/fdb46962-10c1-45fc-a228-d0b055411448.jpg?im_w=720" alt="Immagine di benvenuto">
                         <div class="card-body">
