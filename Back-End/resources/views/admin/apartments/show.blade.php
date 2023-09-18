@@ -59,10 +59,10 @@
                 <div class="col-12">
                     <div class="d-flex justify-content-end align-items-center">
                         <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form class="form-delete" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST" onsubmit="return confirm('Sei sicuro di voler cancellare l\'appartamento?')">
+                        <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">
+                            <button data-apartment-title="{{ $apartment->title }}" type="submit" class="btn btn-sm btn-danger">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </form>
@@ -73,4 +73,5 @@
             <p>{{ $apartment->description }}</p>
         </div>
     </div>
+@include('admin.partials.modal_delete')
 @endsection
