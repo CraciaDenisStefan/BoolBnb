@@ -6,11 +6,17 @@
             <div class="row">
                 <div class="col-12 text-center mt-5 d-flex justify-content-between">
                     <div>
-                        <h1>Servizi</h1>
+                        <a href="{{ route('admin.dashboard') }}" class="btn primary-colour">Vai alla dashboard</a>
+                    </div>
+                    <div>
+                        <a href="{{ route('admin.apartments.index') }}" class="btn primary-colour">Tutte le proprietà</a>
                     </div>
                     <div>
                         <a href="{{ route('admin.services.create') }}" class="btn primary-colour">Crea un nuovo servizio</a>
                     </div>
+                </div>
+                <div class="my-3">
+                    <h1>Servizi</h1>
                 </div>
                 <div class="col-12 mt-5">
                     @if($message != '')

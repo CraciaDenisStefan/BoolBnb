@@ -164,7 +164,7 @@ class ApartmentController extends Controller
             $services = $request->input('services');
             $apartment->services()->sync($services);
         }else{
-            $apartment->services()->detach(); // Rimuovi tutte le associazioni se non ci sono tecnologie selezionate
+            $apartment->services()->detach();
         }
         
         $form_data['slug'] =  $apartment->generateSlug($form_data['title']);
