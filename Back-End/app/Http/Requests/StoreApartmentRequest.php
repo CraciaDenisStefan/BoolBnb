@@ -32,7 +32,7 @@ class StoreApartmentRequest extends FormRequest
             'address' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'description' => 'string|nullable',
-            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'image|mimes:jpeg,png,jpg,gif',
         ];
     }
 
@@ -59,7 +59,6 @@ class StoreApartmentRequest extends FormRequest
             'description.string' => 'Il campo "Descrizione" deve essere una stringa',
             'img.image' => 'Il campo "Immagine" deve essere un\'immagine',
             'img.mimes' => 'Il campo "Immagine" deve essere un file di uno dei seguenti tipi: jpeg, png, jpg, gif',
-            'img.max' => 'Il campo "Immagine" non deve superare :max kilobyte',
         ];
     }
 }

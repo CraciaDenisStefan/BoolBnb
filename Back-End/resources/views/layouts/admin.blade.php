@@ -27,9 +27,8 @@
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
                     <div class="logo">
-                        <img class="logo-img" src="/images/boolbnb.png" alt="boolbnb"> <strong><em>BoolBnB</em></strong>
+                        <img class="logo-img img-fluid" src="/images/LogoNoSfondo3.png" alt="boolbnb"> <span class="letter-spacing">BoolBnB</span>
                     </div>
-
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -111,7 +110,6 @@
         height: 3.75rem;
         margin: .625rem 0;
     }
-
 
     .navbar{
         border-bottom: 0.125rem solid var(--custom-black);

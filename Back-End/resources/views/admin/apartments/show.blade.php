@@ -40,6 +40,15 @@
                         <li class="list-group-item "><i class="fa-solid fa-toilet-paper"></i> <strong>Bagni </strong> {{$apartment->n_bathrooms}}</li>
                         <li class="list-group-item"><i class="fa-solid fa-sack-dollar"></i> <strong>Prezzo </strong> {{$apartment->price}} &euro;</li>
                         <li class="list-group-item"><i class="fa-solid fa-ruler-combined"></i>  {{$apartment->mq}} mq</li>
+                        <li class="list-group-item">
+                            <div>
+                                @if($apartment->visible)
+                                    <i class="fa-solid fa-eye"></i> <strong>Visibile: </strong> <i class="fa-solid fa-check" style="color: #00ff00;"></i>
+                                @else
+                                    <i class="fa-solid fa-eye-slash"></i> <strong>Visibile: </strong> <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
+                                @endif
+                            </div>
+                        </li>
                         <li class="list-group-item">  
                             @if($apartment->services->count() > 0)
                                 <p class="control-label mb-3"><i class="fa-solid fa-circle-info"></i> <strong>Servizi </strong></p>
