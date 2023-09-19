@@ -33,6 +33,7 @@ class UpdateApartmentRequest extends FormRequest
             'price' => 'numeric|min:0|nullable',
             'description' => 'string|nullable',
             'img' => 'image|mimes:jpeg,png,jpg,gif',
+            'services' => 'array|required_without:services.*'
         ];
     }
 
@@ -58,6 +59,8 @@ class UpdateApartmentRequest extends FormRequest
             'description.string' => 'Il campo "Descrizione" deve essere una stringa',
             'img.image' => 'Il campo "Immagine" deve essere un\'immagine',
             'img.mimes' => 'Il campo "Immagine" deve essere un file di uno dei seguenti tipi: jpeg, png, jpg, gif',
+            'services.array' => 'Seleziona almeno un servizio.',
+            'services.required_without' => 'Seleziona almeno un servizio.',
         ];
     }
 }
