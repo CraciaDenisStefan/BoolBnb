@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@vite(['resources/js/address.js'])
 <div class="background_index">
     <div class="container">
         <div class="row">
@@ -62,6 +63,7 @@
                                 <div class="class-group col-12 col-md-6">
                                     <label class="control-label">Indirizzo *</label>
                                     <input type="text" id="address" name="address" class="form-control @error('address')is-invalid @enderror" placeholder="Inserisci l'indirizzo" value="{{ old('address') ?? $apartment->address }}" required>
+                                    <ul id="autocomplete-list" class="list-group box-list"></ul>
                                     @error('address')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror

@@ -12,6 +12,11 @@
     }
 }
 
+.scrollbar{
+    overflow-y: scroll; /* Abilita la scrollbar verticale */
+    max-height: 150px; /* Imposta l'altezza massima per il container prima che la scrollbar appaia */
+}
+
 
 .background_index::before{
     content: "";
