@@ -30,7 +30,7 @@ class UpdateApartmentRequest extends FormRequest
             'n_bathrooms' => 'required|integer|min:1',
             'mq' => 'numeric|min:1',
             'address' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
+            'price' => 'numeric|min:0|nullable',
             'description' => 'string|nullable',
             'img' => 'image|mimes:jpeg,png,jpg,gif',
         ];
@@ -53,7 +53,6 @@ class UpdateApartmentRequest extends FormRequest
             'mq.min' => 'Il campo "Metri quadrati" deve essere almeno :min',
             'address.required' => 'Il campo "Indirizzo" è obbligatorio',
             'address.max' => 'Il campo "Indirizzo" deve contenere al massimo :max caratteri',
-            'price.required' => 'Il campo "Prezzo" è obbligatorio',
             'price.numeric' => 'Il campo "Prezzo" deve essere un numero e non sono ammesse virgole "," per i numeri decimali',
             'price.min' => 'Il campo "Prezzo" deve essere almeno :min',
             'description.string' => 'Il campo "Descrizione" deve essere una stringa',

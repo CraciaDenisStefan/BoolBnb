@@ -22,6 +22,11 @@
           {{ $message }}
       </div>
     @endif
+    @if($apartments->isEmpty())
+    <div class="d-flex justify-content-center">
+      <h1>Devi aggiungere un appartamento</h1>
+    </div>
+    @else
     <div>
       <h3>I tuoi appartamenti</h3>
     </div>
@@ -67,5 +72,6 @@
     </div>
   </div>
 </div>
+@endif
 @include('admin.partials.modal_delete')
 @endsection
