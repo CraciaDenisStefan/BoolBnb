@@ -125,7 +125,13 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         $services = Service::all();
-        return view('admin.apartments.edit', compact('apartment', 'services'));
+        $message = 'Stai cercando di modificare un appartamento non tuo';
+
+        if(Auth::id() === $apartment->user_id){
+            return view("admin.apartments.edit", compact("apartment", "services"));
+        }else{
+            return redirect()->route("admin.apartments.index", compact('message'));
+        }
     }
 
     /**
