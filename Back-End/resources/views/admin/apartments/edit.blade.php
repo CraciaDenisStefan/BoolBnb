@@ -25,43 +25,43 @@
                         <div class="card p-3 shadow-lg my-5">
                             <div class="row">
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Titolo dell'appartamento</label>
-                                    <input type="text" id="title" name="title" class="form-control @error('title')is-invalid @enderror" placeholder="Inserisci il nome dell'appartamento" value="{{ old('title') ?? $apartment->title }}">
+                                    <label class="control-label">Titolo dell'appartamento *</label>
+                                    <input type="text" id="title" name="title" class="form-control @error('title')is-invalid @enderror" placeholder="Inserisci il nome dell'appartamento" value="{{ old('title') ?? $apartment->title }}" required>
                                     @error('title')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Numero stanze</label>
-                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') ?? $apartment->n_rooms }}">
+                                    <label class="control-label">Numero stanze *</label>
+                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required>
                                     @error('n_rooms')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Posti letto</label>
-                                    <input type="number" id="n_beds" name="n_beds" class="form-control @error('n_beds')is-invalid @enderror" placeholder="Inserisci posti letto" value="{{ old('n_beds') ?? $apartment->n_beds }}">
+                                    <label class="control-label">Posti letto *</label>
+                                    <input type="number" id="n_beds" name="n_beds" class="form-control @error('n_beds')is-invalid @enderror" placeholder="Inserisci posti letto" value="{{ old('n_beds') ?? $apartment->n_beds }}" required>
                                     @error('n_beds')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Numero bagni</label>
-                                    <input type="number" id="n_bathrooms" name="n_bathrooms" class="form-control @error('n_bathrooms')is-invalid @enderror" placeholder="Inserisci il numero dei bagni" value="{{ old('n_bathrooms') ?? $apartment->n_bathrooms }}">
+                                    <label class="control-label">Numero bagni *</label>
+                                    <input type="number" id="n_bathrooms" name="n_bathrooms" class="form-control @error('n_bathrooms')is-invalid @enderror" placeholder="Inserisci il numero dei bagni" value="{{ old('n_bathrooms') ?? $apartment->n_bathrooms }}" required>
                                     @error('n_bathrooms')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">m<sup>2</sup></label>
-                                    <input type="number" id="mq" name="mq" class="form-control @error('mq')is-invalid @enderror" placeholder="Inserire i mq" value="{{ old('mq') ?? $apartment->mq }}">
+                                    <label class="control-label">m<sup>2</sup> *</label>
+                                    <input type="number" id="mq" name="mq" class="form-control @error('mq')is-invalid @enderror" placeholder="Inserire i mq" value="{{ old('mq') ?? $apartment->mq }}" required>
                                     @error('mq')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Indirizzo</label>
-                                    <input type="text" id="address" name="address" class="form-control @error('address')is-invalid @enderror" placeholder="Inserisci l'indirizzo" value="{{ old('address') ?? $apartment->address }}">
+                                    <label class="control-label">Indirizzo *</label>
+                                    <input type="text" id="address" name="address" class="form-control @error('address')is-invalid @enderror" placeholder="Inserisci l'indirizzo" value="{{ old('address') ?? $apartment->address }}" required>
                                     @error('address')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
@@ -88,7 +88,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 
-                                    <label class="control-label my-3">Servizi:</label>
+                                    <label class="control-label my-3">Servizi: *</label>
                                     <div class="d-flex flex-wrap">
                                         @foreach($services as $service)
                                             <div class="form-check ms-2">
@@ -115,6 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span class="mt-3" style="font-size: 12px;">* I campi sono obbligatori</span>
                             </div>
                         </div>
                         <div class="class-group my-3">

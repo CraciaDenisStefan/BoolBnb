@@ -2,9 +2,16 @@
 @import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
 .my_card{
-    min-height: 200px;
-
+    min-height: 50px;
+    min-width: 50px;
 }
+
+@media screen and (max-width: 740px) {
+    .display-none {
+        display: none;
+    }
+}
+
 
 .background_index::before{
     content: "";

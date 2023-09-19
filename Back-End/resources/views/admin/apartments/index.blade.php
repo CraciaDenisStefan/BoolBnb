@@ -22,56 +22,75 @@
           {{ $message }}
       </div>
     @endif
+    @if($messageNoAuth != '')
+      <div class="alert alert-danger">
+          {{ $messageNoAuth }}
+      </div>
+    @endif
     @if($apartments->isEmpty())
     <div class="d-flex justify-content-center">
-      <h1>Devi aggiungere un appartamento</h1>
+      <h1 class="my-5">Aggiungi un appartamento</h1>
     </div>
     @else
     <div>
       <h3>I tuoi appartamenti</h3>
     </div>
-    <div class="row ">
-      @foreach($apartments as $apartment)
-        <div class="col-12 col-lg-6 mb-4"> 
-          <div class="card border m-2 d-flex align-items-stretch" >
-            <div class="row g-0">
-              <div class="col-md-4">
-                @if($apartment->img)
-                  <div class="card-img my_card shadow-lg"
-                    style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center; height: 100%;">
-                  </div>
-                @else
-                  <div class="card-img my_card"
-                    style="background-image: url('https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png'); background-size: cover; background-position: center; height: 100%;">
-                  </div>
-                @endif
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Titolo</th>
+          <th class="d-none d-md-block">Descrizione</th>
+          <th class="text-center">Visibilità</th>
+          <th class="text-center">Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($apartments as $apartment)
+        <tr>
+          <td>
+            @if($apartment->img)
+              <div class="card-img d-none d-md-block  my_card shadow-lg"
+                style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center;">
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{$apartment->title}}</h5>
-                  <p class="card-text truncate-text" >{{$apartment->description}}</p>
-                  <p class="card-text">
-                    <div class="d-flex ">
-                      <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
-                      <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button data-apartment-title="{{ $apartment->title }}" type="submit" class="btn btn-sm btn-danger">
-                          <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                      </form>
-                    </div>
-                 </p>
-                </div>
+            @else
+              <div class="card-img my_card d-none d-md-block"
+                style="background-image: url('https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png'); background-size: cover; background-position: center;">
               </div>
+            @endif
+          </td>
+          <td>{{$apartment->title}}</td>
+          <td class="truncate-text display-none">
+            <div class="">
+              {{$apartment->description}}
             </div>
-          </div>
-        </div>
-      @endforeach
-    </div>
+          </td>
+          <td>
+            @if($apartment->visible)
+            <p class="text-center"><i class="fa-solid fa-eye" style="color: #00ff00;"></i> </p>
+            @else
+            <p class="text-center"><i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i></p> 
+            @endif
+          </td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
+              <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button data-apartment-title="{{ $apartment->title }}" type="submit" class="btn btn-sm btn-danger">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    @endif
   </div>
 </div>
-@endif
 @include('admin.partials.modal_delete')
 @endsection

@@ -53,10 +53,10 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }} *</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" required>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -67,10 +67,10 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }} *</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
+                                <input id="password" type="password" minlength="8" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" required>
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -81,12 +81,14 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }} *</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
+                                <input id="password-confirm" type="password" minlength="8" class="form-control" name="password_confirmation"  autocomplete="new-password" required>
+                                <span id="message"></span>
                             </div>
                         </div>
+
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -98,7 +100,10 @@
                     </form>
                 </div>
             </div>
+            <span style="font-size: 12px;">* I campi sono obbligatori</span>
         </div>
     </div>
 </div>
 @endsection
+
+

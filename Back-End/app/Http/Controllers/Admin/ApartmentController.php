@@ -29,8 +29,14 @@ class ApartmentController extends Controller
             $message = '';
         }
 
+        if(isset($datas['messageNoAuth'])){
+            $messageNoAuth = $datas['messageNoAuth'];
+        }else{
+            $messageNoAuth = '';
+        }
+
         $apartments = Apartment::where('user_id', Auth::id())->get();
-        return view('admin.apartments.index', compact('apartments', 'message'));
+        return view('admin.apartments.index', compact('apartments', 'message', 'messageNoAuth'));
     }
 
     /**
@@ -125,12 +131,12 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         $services = Service::all();
-        $message = 'Stai cercando di modificare un appartamento non tuo';
+        $messageNoAuth = 'Stai cercando di modificare un appartamento non tuo';
 
         if(Auth::id() === $apartment->user_id){
             return view("admin.apartments.edit", compact("apartment", "services"));
         }else{
-            return redirect()->route("admin.apartments.index", compact('message'));
+            return redirect()->route("admin.apartments.index", compact('messageNoAuth'));
         }
     }
 
