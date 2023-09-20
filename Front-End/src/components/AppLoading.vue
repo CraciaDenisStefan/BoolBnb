@@ -9,9 +9,13 @@ export default {
 </script>
 <template>
     <div class="loading-spinner">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only"></span>
-        </div>
+        <lord-icon
+            src="https://cdn.lordicon.com/kxoxiwrf.json"
+            trigger="loop"
+            colors="primary:#d77d85,secondary:#000000"
+            stroke="55"
+            style="width:250px;height:250px">
+        </lord-icon>
     </div>
 </template>
 <style lang="scss">

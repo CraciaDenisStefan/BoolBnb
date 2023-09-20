@@ -39,8 +39,9 @@ export default {
 
 }
 </script>
-<template>    
-    <div class="container">
+<template> 
+<AppLoading v-if="this.store.loading" />   
+    <div v-else class="container">
         <div class="row">
             <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-lg-6 mb-4"> 
                 <div class="card border m-2" >
