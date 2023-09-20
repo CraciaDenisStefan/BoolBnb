@@ -20,9 +20,10 @@ class ApartmentController extends Controller
     public function search(Request $request){
         $n_rooms = $request->input('n_rooms'); // Numero di stanze
         $n_beds = $request->input('n_beds');   // Numero di letti
+        $services = $request->input('services'); // Array di ID dei servizi
     
         // Inizia con una query base per gli appartamenti
-        $apartmentsFilter = Apartment::query();
+        $apartmentsFilter = Apartment::query()->with('services');
     
         // Applica i filtri in base ai parametri specificati
         if ($n_rooms !== null) {
@@ -31,6 +32,12 @@ class ApartmentController extends Controller
     
         if ($n_beds !== null) {
             $apartmentsFilter->where('n_beds', '>=', $n_beds);
+        }
+
+        if (!empty($services)) {
+            $apartmentsFilter->whereHas('services', function ($query) use ($services) {
+                $query->whereIn('name', explode(',', $services)); // Separa i servizi in un array se sono separati da virgola
+            });
         }
     
         // Esegui la query e ottieni i risultati
