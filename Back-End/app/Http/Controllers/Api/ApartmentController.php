@@ -48,4 +48,43 @@ class ApartmentController extends Controller
             'results'  => $results
         ]);
     }
+    public function searchApartments(Request $request) {
+        $lat = $request->input('lat'); // Numero di stanze
+        $lon = $request->input('lon');   // Numero di letti
+        $range = $request->input('range');
+
+        $apartments = Apartment::all();
+
+        $apartmentsInRange = [];
+
+        foreach ($apartments as $apartment) {
+
+            // raggio di ricarca default 20km
+            if ($this->haversineGreatCircleDistance($lat, $lon, $apartment->latitude, $apartment->longitude) < $range) {
+                array_push($apartmentsInRange, $apartment);
+            }
+        }
+
+        return json_encode($apartmentsInRange);
+    }
+    public function haversineGreatCircleDistance(
+        $latitudeFrom,
+        $longitudeFrom,
+        $latitudeTo,
+        $longitudeTo,
+        $earthRadius = 6371000
+    ) {
+        // convert from degrees to radians
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+            cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
+    }
 }
