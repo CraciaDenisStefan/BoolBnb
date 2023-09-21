@@ -37,6 +37,16 @@ export default {
                 });
             },
 
+            resetFilters() {
+                this.n_rooms = null;
+                this.n_beds = null;
+                this.address = null;
+                this.range = 20;
+                this.lat = null;
+                this.lon = null;
+                this.getApartments(); // Richiama il metodo per ottenere nuovamente gli appartamenti originali
+            },
+
             filterApartments() {
                 this.apartmentsFilter = [];
                 
@@ -110,6 +120,7 @@ export default {
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
 
             <button  class="btn primary-colour" @click=" filterApartments();" type="button">Filtra</button>
+            <button class="btn secondary-colour" @click="resetFilters();" type="button">Reset</button>
         </form>
             <div class="row">
                 <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">
