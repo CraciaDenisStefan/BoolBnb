@@ -18,7 +18,7 @@ export default {
             address: null,
             lat: null,
             lon: null,
-            range: null
+            range: 20
         }
     },
     created() {
@@ -81,9 +81,9 @@ export default {
             },
 
             getApartmentList() {
-            // this.range *= 1000
+            let rangeKm = this.range * 1000
             axios
-            .get(`${this.store.baseUrl}/api/searchApartments?lat=${this.lat}&lon=${this.lon}&range=${this.range}`)
+            .get(`${this.store.baseUrl}/api/searchApartments?lat=${this.lat}&lon=${this.lon}&range=${rangeKm}`)
             .then((response) => {
             console.log(response.data)
             this.apartmentsFilter = response.data
@@ -101,7 +101,7 @@ export default {
         <input type="number" class="form-control" placeholder="numero di stanze" v-model="this.n_rooms" @keyup="filterApartment()">
         <input type="number" class="form-control" placeholder="numero di letti"  v-model="this.n_beds" @keyup="filterApartment()">
         <input type="text" class="form-control" placeholder="città"  v-model="this.address" @keyup.enter="userCordinates()">
-        <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="this.range">
+        <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="this.range" @keyup.enter="userCordinates()">
 
         <div class="row">
             <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">
