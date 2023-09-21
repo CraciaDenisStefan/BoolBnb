@@ -48,6 +48,7 @@ export default {
                 this.lat = null;
                 this.lon = null;
                 this.getApartments(); // Richiama il metodo per ottenere nuovamente gli appartamenti originali
+                this.selectedServices = []
             },
 
             filterApartments() {
