@@ -18,14 +18,15 @@ class ApartmentController extends Controller
         ]);
     }
     public function search(Request $request){
-        $n_rooms = $request->input('n_rooms'); // Numero di stanze
-        $n_beds = $request->input('n_beds');   // Numero di letti
-        $services = $request->input('services'); // Array di ID dei servizi
+        $n_rooms = $request->input('n_rooms');
+        $n_beds = $request->input('n_beds');
+        $services = $request->input('services');
+        $lat = $request->input('lat');
+        $lon = $request->input('lon');
+        $range = $request->input('range');
     
-        // Inizia con una query base per gli appartamenti
         $apartmentsFilter = Apartment::query()->with('services');
     
-        // Applica i filtri in base ai parametri specificati
         if ($n_rooms !== null) {
             $apartmentsFilter->where('n_rooms', '>=', $n_rooms);
         }
@@ -33,14 +34,22 @@ class ApartmentController extends Controller
         if ($n_beds !== null) {
             $apartmentsFilter->where('n_beds', '>=', $n_beds);
         }
-
+    
         if (!empty($services)) {
             $apartmentsFilter->whereHas('services', function ($query) use ($services) {
-                $query->whereIn('name', explode(',', $services)); // Separa i servizi in un array se sono separati da virgola
+                $query->whereIn('name', explode(',', $services));
             });
         }
     
-        // Esegui la query e ottieni i risultati
+        if ($lat !== null && $lon !== null && $range !== null) {
+            // Calcolo della distanza e ordinamento per la distanza
+            $apartmentsFilter->selectRaw('*,
+                (6371000 * 2 * ASIN(SQRT(POW(SIN((? - ABS(latitude)) * PI() / 180 / 2), 2) +
+                COS(? * PI() / 180) * COS(ABS(latitude) * PI() / 180) * POW(SIN((? - longitude) * PI() / 180 / 2), 2)))) AS distance',
+                [$lat, $lat, $lon]
+            )->having('distance', '<', $range * 1000)->orderBy('distance');
+        }
+    
         $results = $apartmentsFilter->get();
     
         return response()->json([
@@ -48,25 +57,12 @@ class ApartmentController extends Controller
             'results'  => $results
         ]);
     }
-    public function searchApartments(Request $request) {
-        $lat = $request->input('lat'); // Numero di stanze
-        $lon = $request->input('lon');   // Numero di letti
-        $range = $request->input('range');
+    // public function searchApartments(Request $request) {
+        
+    //     $apartments = Apartment::all();
 
-        $apartments = Apartment::all();
 
-        $apartmentsInRange = [];
-
-        foreach ($apartments as $apartment) {
-
-            // raggio di ricarca default 20km
-            if ($this->haversineGreatCircleDistance($lat, $lon, $apartment->latitude, $apartment->longitude) < $range) {
-                array_push($apartmentsInRange, $apartment);
-            }
-        }
-
-        return json_encode($apartmentsInRange);
-    }
+    // }
     public function haversineGreatCircleDistance(
         $latitudeFrom,
         $longitudeFrom,
