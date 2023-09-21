@@ -35,11 +35,16 @@ class ApartmentController extends Controller
             $apartmentsFilter->where('n_beds', '>=', $n_beds);
         }
     
-        if (!empty($services)) {
-            $apartmentsFilter->whereHas('services', function ($query) use ($services) {
-                $query->whereIn('name', explode(',', $services));
+       
+    if (!empty($services)) {
+        $serviceIds = explode(',', $services);
+        
+        foreach ($serviceIds as $id) {
+            $apartmentsFilter->whereHas('services', function ($q) use ($id) {
+                $q->where('services.id', $id);
             });
         }
+    }
     
         if ($lat !== null && $lon !== null && $range !== null) {
             // Calcolo della distanza e ordinamento per la distanza

@@ -18,11 +18,14 @@ export default {
             address: null,
             lat: null,
             lon: null,
-            range: 20
+            range: 20,
+            services: [],
+            selectedServices: []
         }
     },
     created() {
         this.getApartments();
+        this.getServices();
     },
     methods: {
         getApartments(){
@@ -76,6 +79,13 @@ export default {
                             }
                         }
 
+                        if (this.selectedServices.length > 0) {
+                            const encodedServices = this.selectedServices.map(service => encodeURIComponent(service));
+                            this.myUrl += `services=${encodedServices.join(',')}&`;
+                            console.log('servizi', this.myUrl);
+                        }
+
+                        
                         axios.get(this.myUrl).then((response) => {
                             this.apartmentsFilter = response.data.results;
                         });
@@ -83,29 +93,17 @@ export default {
                     .catch((error) => {
                         console.error('Errore nella geocodifica dell\'indirizzo:', error);
                     });
-            },   
-
-            userCordinates() 
-            
-            {axios.get(`https://api.tomtom.com/search/2/geocode/${this.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
-                .then((response) => {
-                    console.log('funziono2')
-                    // Estrai latitudine e longitudine dalla risposta
-                    this.lat = response.data.results[0].position.lat;
-                    this.lon = response.data.results[0].position.lon;
-
-                    // Ora hai le coordinate latitudine e longitudine, puoi usarle per cercare gli appartamenti nel raggio desiderato
-                    // this.searchApartmentsWithinRadius(lat, lon);
-                    console.log(this.lat)
-                    console.log(this.lon)
-
-                })
-                .catch((error) => {
-                    console.error('Errore nella geocodifica dell\'indirizzo:', error);
-                })
-
             },
-
+            getServices(){
+                axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
+                    console.log(response)
+                    if(response.data.success){
+                        this.services = response.data.results;
+                    }else{
+                        this.$router.push({ name: 'not-found' })
+                    }
+                });
+            },   
     }
     
 }
@@ -118,9 +116,12 @@ export default {
             <input type="number" class="form-control" placeholder="numero di letti"  v-model="n_beds">
             <input type="text" class="form-control" placeholder="città"  v-model="this.address">
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
+            <div v-for="service in services" :key="service.id">
+                <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+            </div>
 
-            <button  class="btn primary-colour" @click=" filterApartments();" type="button">Filtra</button>
-            <button class="btn secondary-colour" @click="resetFilters();" type="button">Reset</button>
+            <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
+            <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
         </form>
             <div class="row">
                 <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">

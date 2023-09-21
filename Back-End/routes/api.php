@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::get('/apartmentsFilter', [ApartmentController::class, 'search']);
-// Route::get('/searchApartments', [ApartmentController::class, 'searchApartments']);
+Route::get('/services', [ServiceController::class, 'index']);
+
 
