@@ -38,6 +38,15 @@ export default {
             },
 
             filterApartments() {
+                    // this.apartmentsFilter = []
+                    // this.myUrl = ''
+                    // this.n_rooms = null
+                    // this.n_beds = null
+                    // this.address = null
+                    // this.lat = null
+                    // this.lon = null
+                    // this.range = 20
+
                     console.log('funziono1');
                     this.myUrl = `${this.store.baseUrl}/api/apartmentsFilter?`; // Inizia con un punto interrogativo
 
@@ -51,9 +60,13 @@ export default {
 
                     if (this.address !== null) 
                     {
-
                         this.myUrl += `address=${this.address}&`; // Aggiungi l'indirizzo se è definito
-                        axios.get(`https://api.tomtom.com/search/2/geocode/${this.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
+                        if (this.range !== null && this.lat !== null && this.lon !== null) 
+                                {
+                                    this.myUrl += `range=${this.range}&lat=${this.lat}&lon=${this.lon}&`; // Aggiungi raggio, latitudine e longitudine
+                                }
+                    }
+                    axios.get(`https://api.tomtom.com/search/2/geocode/${this.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
                         .then((response) => {
                             console.log('funziono2')
                             // Estrai latitudine e longitudine dalla risposta
@@ -64,10 +77,6 @@ export default {
                             // this.searchApartmentsWithinRadius(lat, lon);
                             console.log(this.lat)
                             console.log(this.lon)
-                                if (this.range !== null && this.lat !== null && this.lon !== null) 
-                                {
-                                    this.myUrl += `range=${this.range}&lat=${this.lat}&lon=${this.lon}&`; // Aggiungi raggio, latitudine e longitudine
-                                }
 
                                 // Rimuovi l'ultimo carattere (&) dall'URL
                                 this.myUrl = this.myUrl.slice(0, -1);
@@ -80,7 +89,6 @@ export default {
                         .catch((error) => {
                             console.error('Errore nella geocodifica dell\'indirizzo:', error);
                         })
-                    }
             },
 
             userCordinates() 
@@ -116,7 +124,7 @@ export default {
             <input type="number" class="form-control" placeholder="numero di letti"  v-model="this.n_beds">
             <input type="text" class="form-control" placeholder="città"  v-model="this.address">
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="this.range">
-            
+
             <button class="btn primary-colour" @click=" filterApartments();" type="button">Filtra</button>
         </form>
             <div class="row">
