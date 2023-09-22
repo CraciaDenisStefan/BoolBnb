@@ -132,7 +132,7 @@ export default {
             <ul id="autocomplete-list" class="list-group box-list"></ul>
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
             <div v-for="service in services" :key="service.id">
-                <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+                <i :class="service.icon"></i><input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
             </div>
 
             <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>

@@ -15,14 +15,15 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = ['Wi-Fi Gratuito', 'Colazione Inclusa', 'Parcheggio', 'Servizio in Camera', 'Piscina e Spa', 'Servizio di Lavanderia', 'Ristorante', 'Centro Business', 'Servizio di Noleggio Auto'];
-
-        foreach ($services as $serviceName) {
+        $services = ['Wi-Fi Gratuito', 'Colazione Inclusa', 'Parcheggio', 'Servizio in Camera', 'Piscina e Spa', 'Lavanderia', 'Ristorante', 'Sala Riunioni', 'Noleggio Auto'];
+        $icons = ['fa-solid fa-wifi','fa-solid fa-mug-saucer','fa-solid fa-square-parking','fa-solid fa-bell-concierge','fa-solid fa-water-ladder','fa-solid fa-jug-detergent','fa-solid fa-utensils','fa-solid fa-user-tie','fa-solid fa-car'];
+   
+        foreach ($services as $key => $serviceName) {
             $service = new Service();
-
             $service->name = $serviceName;
-
+            $service->icon = $icons[$key];
             $service->save();
         }
     }
+
 }
