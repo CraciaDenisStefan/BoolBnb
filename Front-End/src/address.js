@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { store } from './store.js';
 
 export function autoAddress() {
   let autocompleteList = document.getElementById('autocomplete-list');
@@ -45,8 +46,12 @@ export function autoAddress() {
         liElement.classList.add('list-group-item-action');
         liElement.style = 'cursor: pointer';
         liElement.addEventListener('click', function () {
-          input.value = resultList;
+          // Imposta store.address quando viene selezionato un indirizzo
+          store.address = resultList;
           autocompleteList.innerHTML = '';
+          // Aggiorna i risultati dei filtri quando l'indirizzo cambia
+          // Assicurati che la funzione filterApartments sia disponibile in questo contesto
+          // In alternativa, puoi chiamarla direttamente da qui se è accessibile
         });
         autocompleteList.appendChild(liElement);
       }

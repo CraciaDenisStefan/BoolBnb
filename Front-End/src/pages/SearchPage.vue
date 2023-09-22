@@ -45,7 +45,7 @@ export default {
             resetFilters() {
                 this.n_rooms = null;
                 this.n_beds = null;
-                this.address = null;
+                store.address = null;
                 this.range = 20;
                 this.lat = null;
                 this.lon = null;
