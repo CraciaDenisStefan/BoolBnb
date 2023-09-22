@@ -13,7 +13,14 @@ routes: [
     {
         path: '/SearchPage',
         name: 'search',
-        component: SearchPage
+        component: SearchPage,
+        props: (route) => ({
+            n_rooms: route.query.n_rooms,
+            n_beds: route.query.n_beds,
+            address: route.query.address,
+            range: route.query.range,
+            services: route.query.services,
+          }),
     },
 ]
 });

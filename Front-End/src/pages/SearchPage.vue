@@ -54,6 +54,13 @@ export default {
             },
 
             filterApartments() {
+                const query = {
+                    n_rooms: this.n_rooms,
+                    n_beds: this.n_beds,
+                    address: this.store.address,
+                    range: this.range,
+                    services: this.selectedServices.join(','),
+                };
                 this.apartmentsFilter = [];
                 
                 axios.get(`https://api.tomtom.com/search/2/geocode/${this.store.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
@@ -92,10 +99,14 @@ export default {
                         axios.get(this.myUrl).then((response) => {
                             this.apartmentsFilter = response.data.results;
                         });
+
+                        this.$router.push({ name: 'search', query });
                     })
                     .catch((error) => {
                         console.error('Errore nella geocodifica dell\'indirizzo:', error);
                     });
+
+                    
             },
             getServices(){
                 axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
