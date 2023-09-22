@@ -203,15 +203,24 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
 
-       
-        if($apartment->img){
+        // Verifica se l'utente attualmente autenticato è il proprietario dell'appartamento
+        if (Auth::id() === $apartment->user_id) {
+        // Elimina l'immagine dell'appartamento se esiste
+        if ($apartment->img) {
             Storage::delete($apartment->img);
         }
 
+        // Rimuovi i servizi associati all'appartamento
         $apartment->services()->detach();
-            
+
+        // Elimina l'appartamento dal database
         $apartment->delete();
+
         $message = 'Cancellazione appartamento completata';
-        return redirect()->route('admin.apartments.index', ['message' => $message]);
+        return redirect()->route('admin.apartments.index', compact('message'));
+        } else {
+            $messageNoAuth = 'Stai cercando di cancellare un appartamento non tuo';
+            return redirect()->route("admin.apartments.index", compact('messageNoAuth'));
+        }
     }
 }
