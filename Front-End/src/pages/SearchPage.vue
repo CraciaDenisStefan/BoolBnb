@@ -126,17 +126,47 @@ export default {
 <AppLoading v-if="this.store.loading" />  
     <div v-else class="container">
         <form action="">
-            <input type="number" class="form-control" placeholder="numero di stanze" v-model="n_rooms">
-            <input type="number" class="form-control" placeholder="numero di letti"  v-model="n_beds">
-            <input type="text" id="address" class="form-control" placeholder="città" @keyup="this.autoAddress" v-model="store.address">
-            <ul id="autocomplete-list" class="list-group box-list"></ul>
-            <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
-            <div v-for="service in services" :key="service.id">
-                <i :class="service.icon"></i><input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
-            </div>
-                <div v-for="service in services" :key="service.id">
-                    <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+            <div class="row">
+                <div class="col-12 d-md-flex justify-content-between align-items-center">
+                    <div class="me-3 my-3">
+                        <label for="address">Indirizzo</label>
+                        <input type="text" id="address" class="form-control me-2 rounded-3" placeholder="Indirizzo" @keyup="this.autoAddress" v-model="store.address">
+                        <ul id="autocomplete-list" class="list-group box-list"></ul>
+                    </div>
+                    <div class="me-3 my-3">
+                        <label for="range">Raggio di ricerca</label>
+                        <input type="number" id="range" class="form-control me-2 rounded-3" placeholder="Raggio di ricerca" min="20" v-model="range">
+                    </div>
+                    <div class="me-3 my-3">
+                        <label>Numero di stanze</label>
+                        <input type="number" class="form-control me-2 rounded-3" placeholder="Numero di stanze" v-model="n_rooms">
+                    </div>
+                    <div class="me-3 my-3">
+                        <label>Posti letto</label>
+                        <input type="number" class="form-control rounded-3" placeholder="Posti letto"  v-model="n_beds">
+                    </div>
                 </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap my-4">
+                <div v-for="service in services" :key="service.id">
+                    <div class="text-center">
+                        <i :class="service.icon"></i>
+                    </div>
+                    <label class="my-checkbox">
+                        <input
+                        :value="service.id"
+                        class="btn-check"
+                        type="checkbox"
+                        name="service"
+                        id="service"
+                        v-model="selectedServices"
+                        />
+                        <div class="btn btn-service" :class="{ 'active': selectedServices.includes(service.id) }">
+                            {{ service.name }}
+                        </div>
+                    </label>
+                </div>
+            </div>
     
                 <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
                 <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
@@ -149,5 +179,17 @@ export default {
     </div>
 </template>
 <style lang="scss">
-   
+   .my-checkbox {
+        display: inline-block;
+        margin-right: 10px; /* Spazio tra le checkbox */
+        cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    }
+
+    .btn-service {
+        /* Personalizza il tuo stile di pulsante qui */
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        transition: background-color 0.3s;
+    }
 </style>
