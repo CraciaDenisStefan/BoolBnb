@@ -141,7 +141,7 @@ export default {
                 <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
         </form>
             <div class="row">
-                <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">
+                <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                     <ApartmentCard :apartment="apartment"/>
                 </div>
             </div> 
