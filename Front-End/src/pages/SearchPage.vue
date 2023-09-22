@@ -134,12 +134,15 @@ export default {
             <div v-for="service in services" :key="service.id">
                 <i :class="service.icon"></i><input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
             </div>
-
-            <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
-            <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
+                <div v-for="service in services" :key="service.id">
+                    <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+                </div>
+    
+                <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
+                <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
         </form>
             <div class="row">
-                <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">
+                <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                     <ApartmentCard :apartment="apartment"/>
                 </div>
             </div> 
