@@ -111,15 +111,24 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment, Request $request)
     {
-        $datas = $request->all();
+        $message = '';
 
-        if(isset($datas['message'])){
-            $message = $datas['message'];
-        }else{
-            $message = '';
+        // Verifica se l'utente autenticato è il proprietario dell'appartamento
+        if (Auth::id() === $apartment->user_id) {
+
+            $datas = $request->all();
+
+            if(isset($datas['message'])){
+                $message = $datas['message'];
+            }else{
+                $message = '';
+            }
+
+            return view('admin.apartments.show', compact('apartment', 'message'));
+        } else {
+            $messageNoAuth = 'Stai cercando di visualizzare un appartamento non tuo';
+            return redirect()->route("admin.apartments.index", compact('messageNoAuth'));
         }
-
-        return view('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**
