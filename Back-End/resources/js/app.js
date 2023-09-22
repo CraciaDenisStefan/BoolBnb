@@ -79,6 +79,7 @@ window.addEventListener('scroll', function () {
     }
 });
 
+// Controllo lato client servizi
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('apartment-form');
     form.addEventListener('submit', function (event) {
