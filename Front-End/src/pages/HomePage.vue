@@ -3,6 +3,7 @@ import axios from 'axios';
 import { store } from '../store.js';
 import AppLoading from '../components/AppLoading.vue';
 import ApartmentCard from '../components/ApartmentCard.vue';
+import { autoAddress } from '../address.js';
 export default {
     components:{
         AppLoading,
@@ -12,7 +13,7 @@ export default {
         return {
             apartments: [],
             store,
-   
+            autoAddress,
         }
     },
     created() {
@@ -32,6 +33,16 @@ export default {
                 });
             },
 
+        redirectToSearch() {
+            const addressInput = document.getElementById("address");
+            const address = addressInput.value.trim(); // Ottieni l'indirizzo inserito e rimuovi gli spazi vuoti
+
+            if (address !== "") {
+                // Reindirizza l'utente alla pagina di ricerca con l'indirizzo come parametro
+                this.$router.push({ name: 'search', query: { address: store.address } });
+            }
+        }
+
     },
 
 }
@@ -40,7 +51,10 @@ export default {
 <AppLoading v-if="this.store.loading" />  
     <div v-else class="container">
         <div class="d-flex justify-content-center mb-4">
-            <router-link class="btn primary-colour" :to="{ name:'search' }">Ricerca appartamenti</router-link>
+            <div>
+                <input type="text" id="address" class="form-control" placeholder="città" @keyup.enter="redirectToSearch()" @keyup="this.autoAddress" v-model="store.address">
+                <ul @click="redirectToSearch()" id="autocomplete-list" class="list-group box-list"></ul>
+            </div>
         </div>
         <div class="row">
             <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-lg-6 mb-4">

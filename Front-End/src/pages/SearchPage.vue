@@ -17,7 +17,6 @@ export default {
             myUrl: '',
             n_rooms: null,
             n_beds: null,
-            address: null,
             lat: null,
             lon: null,
             range: 20,
@@ -28,6 +27,7 @@ export default {
     created() {
         this.getApartments();
         this.getServices();
+        this.filterApartments();
     },
     methods: {
         getApartments(){
@@ -56,7 +56,7 @@ export default {
             filterApartments() {
                 this.apartmentsFilter = [];
                 
-                axios.get(`https://api.tomtom.com/search/2/geocode/${this.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
+                axios.get(`https://api.tomtom.com/search/2/geocode/${this.store.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`)
                     .then((response) => {
                         console.log('Geocodifica avvenuta con successo');
                         
@@ -75,8 +75,8 @@ export default {
                             this.myUrl += `n_beds=${this.n_beds}&`;
                         }
 
-                        if (this.address !== null) {
-                            this.myUrl += `address=${this.address}&`;
+                        if (this.store.address !== null) {
+                            this.myUrl += `address=${this.store.address}&`;
                             if (this.range !== null && this.lat !== null && this.lon !== null) {
                                 this.myUrl += `range=${this.range}&lat=${this.lat}&lon=${this.lon}&`;
                             }
@@ -117,7 +117,7 @@ export default {
         <form action="">
             <input type="number" class="form-control" placeholder="numero di stanze" v-model="n_rooms">
             <input type="number" class="form-control" placeholder="numero di letti"  v-model="n_beds">
-            <input type="text" id="address" class="form-control" placeholder="città" @keyup="this.autoAddress" v-model="address">
+            <input type="text" id="address" class="form-control" placeholder="città" @keyup="this.autoAddress" v-model="store.address">
             <ul id="autocomplete-list" class="list-group box-list"></ul>
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
             <div v-for="service in services" :key="service.id">
