@@ -3,15 +3,17 @@ import axios from 'axios';
 import { store } from '../store.js';
 import AppLoading from '../components/AppLoading.vue';
 import ApartmentCard from '../components/ApartmentCard.vue';
+import { autoAddress } from '../address.js';
 export default {
     components:{
         AppLoading,
-        ApartmentCard
+        ApartmentCard,
     },
     data() {
         return {
             apartmentsFilter: [],
             store,
+            autoAddress,
             myUrl: '',
             n_rooms: null,
             n_beds: null,
@@ -104,7 +106,7 @@ export default {
                         this.$router.push({ name: 'not-found' })
                     }
                 });
-            },   
+            }, 
     }
     
 }
@@ -115,7 +117,8 @@ export default {
         <form action="">
             <input type="number" class="form-control" placeholder="numero di stanze" v-model="n_rooms">
             <input type="number" class="form-control" placeholder="numero di letti"  v-model="n_beds">
-            <input type="text" class="form-control" placeholder="città"  v-model="this.address">
+            <input type="text" id="address" class="form-control" placeholder="città" @keyup="this.autoAddress" v-model="address">
+            <ul id="autocomplete-list" class="list-group box-list"></ul>
             <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
             <div v-for="service in services" :key="service.id">
                 <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
