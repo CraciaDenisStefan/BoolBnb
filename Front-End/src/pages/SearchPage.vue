@@ -126,17 +126,19 @@ export default {
 <AppLoading v-if="this.store.loading" />  
     <div v-else class="container">
         <form action="">
-            <input type="number" class="form-control" placeholder="numero di stanze" v-model="n_rooms">
-            <input type="number" class="form-control" placeholder="numero di letti"  v-model="n_beds">
-            <input type="text" id="address" class="form-control" placeholder="città" @keyup="this.autoAddress" v-model="store.address">
-            <ul id="autocomplete-list" class="list-group box-list"></ul>
-            <input type="number" class="form-control" placeholder="raggio di ricerca" min="20" v-model="range">
-            <div v-for="service in services" :key="service.id">
-                <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+            <div class="d-flex justify-content-between mx-2">
+                <input type="text" id="address" class="form-control rounded-3 me-3" placeholder="Indirizzo" @keyup="this.autoAddress" v-model="store.address">
+                <ul id="autocomplete-list" class="list-group box-list"></ul>
+                <input type="number" class="form-control rounded-3 me-3" placeholder="Raggio di ricerca" min="20" v-model="range">
+                <input type="number" class="form-control rounded-3 me-3" placeholder="Numero di stanze" v-model="n_rooms">
+                <input type="number" class="form-control rounded-3" placeholder="Numero di letti"  v-model="n_beds">
             </div>
-
-            <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
-            <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
+                <div v-for="service in services" :key="service.id">
+                    <input :value="service.id" type="checkbox" name="service" id="service" v-model="selectedServices"> <span>{{ service.name }}</span>
+                </div>
+    
+                <button  class="btn primary-colour mx-3" @click=" filterApartments();" type="button">Filtra</button>
+                <button class="btn primary-colour" @click="resetFilters();" type="button">Reset</button>
         </form>
             <div class="row">
                 <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-lg-6 mb-4">
