@@ -79,5 +79,14 @@ window.addEventListener('scroll', function () {
     }
 });
 
-
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('apartment-form');
+    form.addEventListener('submit', function (event) {
+        const selectedServices = document.querySelectorAll('input[name="services[]"]:checked');
+        if (selectedServices.length === 0) {
+            servicesError.textContent = 'Seleziona almeno un servizio.';
+            event.preventDefault(); // Prevent form submission if no services are selected
+        }
+    });
+});
 

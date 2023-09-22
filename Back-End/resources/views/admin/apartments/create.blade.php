@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="apartment-form" action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card p-3 shadow-lg my-5">
                             <div class="row">
@@ -95,6 +95,7 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    <div class="text-danger" id="servicesError"></div>
                                     @error('services')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
