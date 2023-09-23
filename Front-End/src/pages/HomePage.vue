@@ -52,12 +52,13 @@ export default {
     <div v-else class="container">
         <div class="d-flex justify-content-center mb-4">
             <div>
-                <input type="text" id="address" class="form-control" placeholder="città" @keyup.enter="redirectToSearch()" @keyup="this.autoAddress" v-model="store.address">
+                <label for="address">Indirizzo</label>
+                <input type="text" id="address" class="form-control rounded-3" placeholder="Indirizzo" @keyup.enter="redirectToSearch()" @keyup="this.autoAddress" v-model="store.address">
                 <ul @click="redirectToSearch()" id="autocomplete-list" class="list-group box-list"></ul>
             </div>
         </div>
         <div class="row">
-            <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-lg-6 mb-4">
+            <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
                 <ApartmentCard :apartment="apartment"/>
             </div>
         </div>     
