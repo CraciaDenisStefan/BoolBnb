@@ -20,7 +20,7 @@ routes: [
             address: route.query.address,
             range: route.query.range,
             services: route.query.services,
-          }),
+        }),
     },
 ]
 });
