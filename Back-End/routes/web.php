@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 
 /*
@@ -23,6 +25,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function(){
     Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
+    Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorships.index');
+    Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
 });
 
 Route::middleware('auth')->group(function () {

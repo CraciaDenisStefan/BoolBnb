@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Service;
+use App\Models\Sponsorship;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,5 +24,9 @@ class Apartment extends Model
 
     public function services() {
         return $this->belongsToMany(Service::class);
+    }
+
+    public function sponsorships() {
+        return $this->belongsToMany(Sponsorship::class);
     }
 }

@@ -12,6 +12,9 @@
         <div>
           <a href="{{route('admin.apartments.create')}}" class="btn primary-colour">Aggiungi un appartamento</a>
         </div>
+        <div>
+          <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour">Aggiungi un appartamento</a>
+        </div>
       </div>
     </div>
   </div>
