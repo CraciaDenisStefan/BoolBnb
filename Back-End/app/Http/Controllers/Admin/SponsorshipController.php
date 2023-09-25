@@ -15,6 +15,7 @@ class SponsorshipController extends Controller
     {
         $user_id = Auth::user()->id;
         $sponsorships = Sponsorship::all();
+        // Vengono recuperati gli appartamenti associati all'utente autenticato
         $userApartments = auth()->user()->apartments;
         $userSponsors = auth()->user()->sponsors;
         $apartments = Apartment::all()->where('user_id', $user_id);

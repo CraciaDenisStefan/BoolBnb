@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Braintree\Gateway;
-use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -18,6 +17,7 @@ class PaymentController extends Controller
         $sponsorship = Sponsorship::find($sponsorshipId);
         $apartmentId = $request->input('apartment_id');
         $apartment = Apartment::find($apartmentId);
+        // Estrae il nonce (un token di pagamento) dalla richiesta HTTP
         $nonce = $request->payment_method_nonce;
         $price = $sponsorship->price;
 
@@ -30,22 +30,22 @@ class PaymentController extends Controller
         ]);
 
         // Gestisci il pagamento in base al metodo selezionato
-        if ($paymentMethod === 'creditCard') {
+        if($paymentMethod === 'creditCard'){
             // Elabora la transazione con carta di credito
             $result = $gateway->transaction()->sale([
                 'amount' => $price,
+                //Prende il token nonce
                 'paymentMethodNonce' => $nonce,
-                'options' => [
-                    'submitForSettlement' => true,
-                ],
+                // transazione verrà inviata per l'elaborazione immediata
+                'options' => [ 'submitForSettlement' => true],
             ]);
-        } elseif ($paymentMethod === 'paypal') {
+        }elseif($paymentMethod === 'paypal'){
             // Elabora la transazione con PayPal
             // Implementa la logica per il pagamento PayPal
         }
 
         // Gestisci la risposta di Braintree e restituisci una vista appropriata
-        if($result){
+        if($result->success){
             if($apartment->sponsorships()->count() > 0){
                 return view('admin.payment.already');
             }else{
@@ -54,11 +54,10 @@ class PaymentController extends Controller
                     'end_date' => (now()->addHours(2 + $sponsorship->duration)),
                 ]);
             };
-
-             return view('admin.payment.success');
-        } else {
-             // Pagamento fallito, mostra una vista di errore
-             return view('admin.payment.error', ['errorMessage' => $result->message]);
+            return view('admin.payment.success');
+        }else{
+            // Pagamento fallito, mostra una vista di errore
+            return view('admin.payment.error', ['errorMessage' => $result->message]);
         }
     }
 }
