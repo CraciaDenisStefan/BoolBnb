@@ -45,11 +45,11 @@ export default {
     },
     methods: {
         sponsoredApartments(){
-            this.sponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => apartment.sponsorships && apartment.sponsorships.length > 0);
+            this.sponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => apartment.sponsorships && apartment.sponsorships.length > 0 && apartment.visible);
         },
         
         nonSponsoredApartments(){
-            this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0);
+            this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0 && apartment.visible);
         },
 
         prevSlide(){
