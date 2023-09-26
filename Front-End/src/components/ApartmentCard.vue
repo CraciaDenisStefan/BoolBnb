@@ -52,6 +52,7 @@ export default {
                 </span>
             </span>
             <span v-else>Nessun servizio disponibile</span>
+            <p class="card-text my-3" v-if="apartment.distance"><strong><i class="fa-solid fa-ruler"></i> Distanza: </strong> {{ (apartment.distance / 1000).toFixed(1) }} Km</p>
           </div>
         </div>
   </template>

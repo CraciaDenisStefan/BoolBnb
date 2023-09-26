@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@vite(['resources/js/isSponsored.js'])
 
 <div class="background_index">
   <div class="container">
@@ -45,6 +46,7 @@
           <th>Titolo</th>
           <th class="d-none d-md-block">Descrizione</th>
           <th class="text-center">Visibilità</th>
+          <th class="text-center">Sponzorizzato</th>
           <th class="text-center">Azioni</th>
         </tr>
       </thead>
@@ -70,10 +72,40 @@
           </td>
           <td>
             @if($apartment->visible)
-            <p class="text-center"><i class="fa-solid fa-eye" style="color: #00ff00;"></i> </p>
+              <p class="text-center"><i class="fa-solid fa-eye" style="color: #00ff00;"></i> </p>
             @else
-            <p class="text-center"><i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i></p> 
+              <p class="text-center"><i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i></p> 
             @endif
+          </td>
+          <td>
+            <?php
+              $currentTimestamp = time(); // Ottieni il timestamp UNIX corrente
+              $currentDate = strtotime('now'); // Converti il timestamp corrente in un oggetto DateTime
+              date_default_timezone_set('Europe/Rome'); // Imposta il fuso orario a Roma
+              
+              if (count($apartment->sponsorships) > 0) {
+                  $isSponsored = false;
+              
+                  foreach ($apartment->sponsorships as $sponsorship) {
+                      $endDate = strtotime($sponsorship->pivot->end_date); // Converti la data di fine in timestamp
+              
+                      if ($currentTimestamp < $endDate) {
+                          // L'appartamento è sponsorizzato
+                          $isSponsored = true;
+                          break; // Non c'è bisogno di continuare a controllare le altre sponsorizzazioni
+                      }
+                  }
+              
+                  if ($isSponsored) {
+                      echo '<p class="text-center"><i class="fa-solid fa-star" style="color: #FFD700;"></i></p>';
+                  } else {
+                      echo '<p class="text-center">No</p>';
+                  }
+              } else {
+                  echo '<p class="text-center">No</p>';
+              }
+              
+            ?>
           </td>
           <td>
             <div class="d-flex justify-content-center">
