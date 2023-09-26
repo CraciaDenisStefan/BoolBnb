@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ApartmentController extends Controller
 {
     public function index(){
-        $apartments = Apartment::inRandomOrder()->with('services')->whereHas('sponsorships')->get();
+        $apartments = Apartment::inRandomOrder()->with('services','sponsorships')->whereHas('sponsorships')->get();
         return response()->json([
             'success' => true,
             'results'  => $apartments

@@ -115,6 +115,7 @@ export default {
             // this.filterApartments();
             this.sponsoredApartmentsArray= [];
             this.nonSponsoredApartmentsArray= []
+            this.$router.push({ name: 'search', address:'' });
         },
 
         filterApartments(){
@@ -158,7 +159,6 @@ export default {
             if(this.selectedServices.length > 0){
                 const encodedServices = this.selectedServices.map((service) => encodeURIComponent(service));
                 this.myUrl += `services=${encodedServices.join(',')}&`;
-                console.log('servizi', this.myUrl);
             }
 
             axios.get(this.myUrl).then((response) => {
@@ -168,6 +168,7 @@ export default {
             });
 
                 this.$router.push({ name: 'search', query });
+
             })
             .catch((error) => {
                 console.error('Errore nella geocodifica dell\'indirizzo:', error);

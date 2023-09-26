@@ -14,25 +14,46 @@ export default {
             apartments: [],
             store,
             autoAddress,
+            sponsoredApartmentsArray: [],
         }
     },
     created() {
         this.getApartments();
     },
     methods: {
+        sponsoredApartments(){
+            this.sponsoredApartmentsArray= [];
+            const dateNow = new Date();
+            dateNow.setHours(dateNow.getHours() + 2);
+            const formattedDate = dateNow.toISOString().slice(0, 19).replace("T", " ");
+            this.apartments.forEach(apartment => {
+                if (
+                    apartment.sponsorships &&
+                    apartment.sponsorships.length > 0 &&
+                    apartment.visible
+                ){
+                    apartment.sponsorships.forEach(sponsorship => {
+                    if (new Date(formattedDate) < new Date(sponsorship.pivot.end_date)) {
+                        // Aggiungi l'appartamento alla lista degli appartamenti sponsorizzati
+                        this.sponsoredApartmentsArray.push(apartment);
+                        }
+                    });
+                }
+            });
+        },
         getApartments(){
                 this.store.loading = true;
                 axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
-                    console.log(response)
                     if(response.data.success){
                         this.apartments = response.data.results;
                         this.store.loading = false;
+                        this.sponsoredApartments()
                     }else{
                         this.$router.push({ name: 'not-found' })
                     }
                 });
+               
             },
-
         redirectToSearch() {
             const addressInput = document.getElementById("address");
             const address = addressInput.value.trim(); // Ottieni l'indirizzo inserito e rimuovi gli spazi vuoti
@@ -58,7 +79,7 @@ export default {
             </div>
         </div>
         <div class="row">
-            <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
+            <div v-for="apartment in this.sponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
                 <ApartmentCard :apartment="apartment"/>
             </div>
         </div>     
