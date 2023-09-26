@@ -63,13 +63,28 @@ export default {
                     });
                 }
                 });
-        },
-
-      
-        nonSponsoredApartments(){
+        },  
+         nonSponsoredApartments(){
+            this.nonSponsoredApartmentsArray= [];
             this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0 && apartment.visible);
-        },
-
+                const dateNow = new Date();
+                dateNow.setHours(dateNow.getHours() + 2);
+                const formattedDate = dateNow.toISOString().slice(0, 19).replace("T", " ");
+                this.apartmentsFilter.forEach(apartment => {
+                    if (
+                        apartment.sponsorships &&
+                        apartment.sponsorships.length > 0 &&
+                        apartment.visible
+                    ) {
+                        apartment.sponsorships.forEach(sponsorship => {
+                        if (new Date(formattedDate) >= new Date(sponsorship.pivot.end_date)) {
+                            // Aggiungi l'appartamento alla lista degli appartamenti sponsorizzati
+                            this.nonSponsoredApartmentsArray.push(apartment);
+                        }
+                        });
+                    }
+                    });
+         },
         prevSlide(){
             if(this.sliderPosition > 0){
                 this.sliderPosition -= this.itemsToShow; // Aggiorna il valore del passo
@@ -291,23 +306,35 @@ export default {
                 <button class="btn primary-colour" @click="resetFilters" type="button">Reset</button>
             </div>
         </form>
-        <div class="row">
-            <!-- Visualizza gli appartamenti sponsorizzati -->
-            <h1>Appartamneti in evidenza</h1>
-            <div v-for="apartment in this.sponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
-                <ApartmentCard :apartment="apartment" />
+       
+            <div v-if="sponsoredApartmentsArray.length > 0">
+                <!-- Visualizza gli appartamenti sponsorizzati -->
+                <h1>Appartamenti in evidenza</h1>
+                <div class="row">
+                    <div v-for="apartment in sponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
+                        <ApartmentCard :apartment="apartment" />
+                    </div>
+                </div>
             </div>
-        </div>
+        
 
-        <hr class="border border-danger border-3 opacity-100">
-
-        <div class="row">
+            <div v-if="nonSponsoredApartmentsArray.length > 0">
             <!-- Visualizza gli appartamenti non sponsorizzati -->
-            <div v-for="apartment in this.nonSponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
-                <ApartmentCard :apartment="apartment" />
+                <h1>Altri Appartamenti</h1>
+                <div class="row">
+                    <div v-for="apartment in nonSponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
+                        <ApartmentCard :apartment="apartment" />
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="no-apartments" v-if="sponsoredApartmentsArray.length === 0 && nonSponsoredApartmentsArray.length === 0">
+            <h1 class="text-center mt-5">Nessun appartamento trovato!</h1>
+            </div>
+       
     </div>
+     
+            
 </template>
   
 <style lang="scss">
@@ -348,6 +375,17 @@ export default {
   
     .slider-control:focus{
         outline: none;
+    }
+    .no-apartments{
+        opacity: 0; /* Imposta l'opacità a 0 per nascondere inizialmente il div */
+        transition: opacity 0.3s ease; /* Aggiungi una transizione per l'opacità */
+        animation: fadeIn 0.3s ease-in-out 0.3s forwards; /* Applica un ritardo di 1 secondo prima dell'inizio dell'animazione */
+    }
+
+    @keyframes fadeIn{
+    to {
+        opacity: 1; /* Alla fine dell'animazione, imposta l'opacità a 1 per mostrare il div */
+    }
     }
   
     @media (min-width: 768px) {
