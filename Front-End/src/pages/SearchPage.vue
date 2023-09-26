@@ -45,9 +45,27 @@ export default {
     },
     methods: {
         sponsoredApartments(){
-            this.sponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => apartment.sponsorships && apartment.sponsorships.length > 0 && apartment.visible);
+            this.sponsoredApartmentsArray= [];
+            const dateNow = new Date();
+            dateNow.setHours(dateNow.getHours() + 2);
+            const formattedDate = dateNow.toISOString().slice(0, 19).replace("T", " ");
+            this.apartmentsFilter.forEach(apartment => {
+                if (
+                    apartment.sponsorships &&
+                    apartment.sponsorships.length > 0 &&
+                    apartment.visible
+                ) {
+                    apartment.sponsorships.forEach(sponsorship => {
+                    if (new Date(formattedDate) < new Date(sponsorship.pivot.end_date)) {
+                        // Aggiungi l'appartamento alla lista degli appartamenti sponsorizzati
+                        this.sponsoredApartmentsArray.push(apartment);
+                    }
+                    });
+                }
+                });
         },
-        
+
+      
         nonSponsoredApartments(){
             this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0 && apartment.visible);
         },
@@ -92,9 +110,11 @@ export default {
             this.range = 20;
             this.lat = null;
             this.lon = null;
-            this.getApartments();
+            // this.getApartments();
             this.selectedServices = [];
-            this.filterApartments();
+            // this.filterApartments();
+            this.sponsoredApartmentsArray= [];
+            this.nonSponsoredApartmentsArray= []
         },
 
         filterApartments(){
