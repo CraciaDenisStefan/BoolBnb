@@ -26,7 +26,7 @@
                         <div class="card p-3 shadow-lg my-5">
                             <div class="row">
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label">Titolo dell'appartamento *</label>
+                                    <label class="control-label">Nome dell'appartamento *</label>
                                     <input type="text" id="title" name="title" class="form-control @error('title')is-invalid @enderror" placeholder="Inserisci il nome dell'appartamento" value="{{ old('title') ?? $apartment->title }}" required>
                                     @error('title')
                                         <div class="text-danger"> {{ $message }} </div>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="class-group col-12 col-md-6">
                                     <label class="control-label">Numero stanze *</label>
-                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required>
+                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero delle stanze" value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required>
                                     @error('n_rooms')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror

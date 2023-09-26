@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 my-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Inserisci un nuovo appartamneto</h2>
+                    <h2>Inserisci un nuovo appartamento</h2>
                     <a href=" {{ route('admin.apartments.index')}} " class="btn primary-colour">Tutte le proprietà</a>
                 </div>
                 <div>
@@ -25,7 +25,7 @@
                         <div class="card p-3 shadow-lg my-5">
                             <div class="row">
                                 <div class="class-group col-12 col-md-6">
-                                    <label class="control-label mt-2">Titolo dell'appartamento *</label>
+                                    <label class="control-label mt-2">Nome dell'appartamento *</label>
                                     <input type="text" id="title" name="title" class="form-control @error('title')is-invalid @enderror" placeholder="Inserisci il nome dell'appartamento" value="{{ old('title') }}" required>
                                     @error('title')
                                         <div class="text-danger"> {{ $message }} </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="class-group col-12 col-md-6">
                                     <label class="control-label mt-2">Numero stanze *</label>
-                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero degli appartamenti" value="{{ old('n_rooms') }}" required>
+                                    <input type="number" id="n_rooms" name="n_rooms" class="form-control @error('n_rooms')is-invalid @enderror" placeholder="Inserire il numero delle stanze" value="{{ old('n_rooms') }}" required>
                                     @error('n_rooms')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror

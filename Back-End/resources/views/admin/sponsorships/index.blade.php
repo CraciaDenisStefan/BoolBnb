@@ -32,9 +32,9 @@
                         @csrf
                         <div class="card mb-3" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
                             <div class="card-body">
-                                <h2 class="card-title">Aquista una sponsorizzazione</h2>
+                                <h2 class="card-title">Acquista una sponsorizzazione</h2>
                                 <div class="form-group">
-                                    <label for="sponsorship_id">Scegli un pacchetto:</label><br>
+                                    <label for="sponsorship_id">Seleziona un pacchetto:</label><br>
                                     @foreach ($sponsorships as $sponsorship)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="sponsorship_id"
@@ -56,7 +56,7 @@
                                 <div class="form-group mt-3">
                                     <label for="apartment_id">Scegli un appartamento:</label>
                                     <select name="apartment_id" id="apartment_id" class="form-control" required>
-                                        <option value="">Scegli un appartamento</option>
+                                        <option value="">Seleziona un appartamento</option>
                                         @foreach ($apartments as $apartment)
                                             <option value="{{ $apartment->id }}">
                                                 {{ $apartment->title }}
@@ -74,7 +74,7 @@
                                     <div id="checkout-message"></div>
                                     <div id="dropin-container"></div>
                                     <input id="nonce" name="payment_method_nonce" type="hidden" required />
-                                    <button id="submit-button" class="btn btn-primary btn-block">Paga</button>
+                                    <button id="submit-button" class="btn btn-primary btn-block">Acquista</button>
                                 </div>
                             </div>
                         </div>
