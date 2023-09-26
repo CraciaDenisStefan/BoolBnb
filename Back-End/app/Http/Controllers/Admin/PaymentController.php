@@ -44,18 +44,33 @@ class PaymentController extends Controller
             // Implementa la logica per il pagamento PayPal
         }
 
+        $currentTimestamp = time(); // Ottieni il timestamp UNIX corrente
+        date_default_timezone_set('Europe/Rome'); // Imposta il fuso orario a Roma
+        
+        $isSponsored = false; // Inizializza la variabile isSponsored a false
+        
+        foreach ($apartment->sponsorships as $sponsorship) {
+            $endDate = strtotime($sponsorship->pivot->end_date); // Converti la data di fine in timestamp
+        
+            if ($currentTimestamp < $endDate) {
+                // L'appartamento è sponsorizzato
+                $isSponsored = true;
+                break; // Non c'è bisogno di continuare a controllare le altre sponsorizzazioni
+            }
+        }
+        
         // Gestisci la risposta di Braintree e restituisci una vista appropriata
-        if($result->success){
-            if($apartment->sponsorships()->count() > 0){
+        if ($result->success) {
+            if ($isSponsored) { // Utilizza la variabile $isSponsored invece di $sponsorship
                 return view('admin.payment.already');
-            }else{
+            } else {
                 $apartment->sponsorships()->attach($sponsorship->id, [
                     'start_date' => now()->addHours(2), // Imposta la data corrente
                     'end_date' => (now()->addHours(2 + $sponsorship->duration)),
                 ]);
-            };
-            return view('admin.payment.success');
-        }else{
+                return view('admin.payment.success');
+            }
+        } else {
             // Pagamento fallito, mostra una vista di errore
             return view('admin.payment.error', ['errorMessage' => $result->message]);
         }
