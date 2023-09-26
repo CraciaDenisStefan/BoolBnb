@@ -25,6 +25,8 @@ export default {
             selectedServices: [],
             sliderPosition: 0,
             itemsToShow: 4,
+            sponsoredApartmentsArray: [],
+            nonSponsoredApartmentsArray: []
         };
     },
     computed: {
@@ -42,6 +44,14 @@ export default {
         this.handleWindowResize(); // Aggiungi un ascoltatore per il ridimensionamento
     },
     methods: {
+        sponsoredApartments(){
+            this.sponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => apartment.sponsorships && apartment.sponsorships.length > 0 && apartment.visible);
+        },
+        
+        nonSponsoredApartments(){
+            this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0 && apartment.visible);
+        },
+
         prevSlide(){
             if(this.sliderPosition > 0){
                 this.sliderPosition -= this.itemsToShow; // Aggiorna il valore del passo
@@ -102,7 +112,6 @@ export default {
             `https://api.tomtom.com/search/2/geocode/${this.store.address}.json?key=i0LOdzaKgh77G9KYA4lqDP3GOttQ0kZT`
             )
             .then((response) => {
-            console.log('Geocodifica avvenuta con successo');
 
             // Estrai latitudine e longitudine dalla risposta
             this.lat = response.data.results[0].position.lat;
@@ -134,6 +143,8 @@ export default {
 
             axios.get(this.myUrl).then((response) => {
                 this.apartmentsFilter = response.data.results;
+                this.sponsoredApartments()
+                this.nonSponsoredApartments();
             });
 
                 this.$router.push({ name: 'search', query });
@@ -141,11 +152,12 @@ export default {
             .catch((error) => {
                 console.error('Errore nella geocodifica dell\'indirizzo:', error);
             });
+
+           
         },
 
         getServices(){
             axios.get(`${this.store.baseUrl}/api/services`).then((response) => {
-                console.log(response);
                 if(response.data.success){
                     this.services = response.data.results;
                 }else{
@@ -259,7 +271,18 @@ export default {
             </div>
         </form>
         <div class="row">
-            <div v-for="apartment in apartmentsFilter" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
+            <!-- Visualizza gli appartamenti sponsorizzati -->
+            <h1>Appartamneti in evidenza</h1>
+            <div v-for="apartment in this.sponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
+                <ApartmentCard :apartment="apartment" />
+            </div>
+        </div>
+
+        <hr class="border border-danger border-3 opacity-100">
+
+        <div class="row">
+            <!-- Visualizza gli appartamenti non sponsorizzati -->
+            <div v-for="apartment in this.nonSponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
                 <ApartmentCard :apartment="apartment" />
             </div>
         </div>
