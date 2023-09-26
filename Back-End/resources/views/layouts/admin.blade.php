@@ -108,9 +108,10 @@
     left: 0;
     width: 100%;
     transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(215, 125, 133, 0.75);
     }
     .header-scrolled {
-        background-color: white;
+        background-color: rgba(215, 125, 133, 0.95);
     }
 
     .logo{
