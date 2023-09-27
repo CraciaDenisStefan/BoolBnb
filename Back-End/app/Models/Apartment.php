@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Lead;
 use App\Models\Service;
 use App\Models\Sponsorship;
 use Illuminate\Support\Str;
@@ -28,5 +29,9 @@ class Apartment extends Model
 
     public function sponsorships() {
         return $this->belongsToMany(Sponsorship::class)->withPivot('start_date', 'end_date');
+    }
+
+    public function leads() {
+        return $this->hasMany(Leads::class);
     }
 }

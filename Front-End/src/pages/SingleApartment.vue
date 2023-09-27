@@ -16,6 +16,7 @@ export default {
             email: '',
             content: '',
             errors: {},
+            apartment_id: '',
         }
     },
     
@@ -57,6 +58,8 @@ export default {
                 const response = await axios.get(`${store.baseUrl}/api/apartment/${this.$route.params.slug}`)
            
                 this.apartment = response.data.apartment;
+                this.apartment_id = this.apartment.id;
+                console.log(this.apartment_id);
                 
                 this.getMap(this.apartment.longitude, this.apartment.latitude);
 
@@ -77,7 +80,7 @@ export default {
                 name: this.name,
                 email: this.email,
                 content: this.content,
-                apartment_id: this.apartment.id
+                apartment_id: this.apartment_id
             } 
     
             this.loading = true;
@@ -94,6 +97,7 @@ export default {
                     this.name = '';
                     this.email = '';
                     this.message = '';
+                    this.apartment_id = '';
     
                     this.$router.push({ name: 'thank-you' })
                 }
@@ -255,7 +259,7 @@ export default {
                     </div>
 
                     <!-- apartment_id -->
-                    <input type="hidden" name="apartment_id" v-model="apartment.id">
+                    <input type="hidden" name="apartment_id" id="apartment_id" v-model="apartment_id">
     
                     <!-- button -->
                     <button type="submit" class="btn" :disabled="loading">
