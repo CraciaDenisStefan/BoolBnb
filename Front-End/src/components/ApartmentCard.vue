@@ -8,21 +8,22 @@ export default {
     data() {
         return {
             maxCaracters: 30,
-            store
+            store,
         }
     },
     methods:{
-        truncateText(text) {
-            if (text.length > this.maxCaracters) {
-                return text.substr(0, this.maxCaracters) + '...';
-            }
-                return text
-            }
+      truncateText(text) {
+        if(text.length > this.maxCaracters){
+          return text.substr(0, this.maxCaracters) + '...';
+        }
+          return text
+      }
     }
 }
 </script>
 <template>
-        <div class="card border m-2 border-danger rounded-4 min-height">
+      <router-link class="text-decoration-none" :to="{ name: 'determinato_appartamento', params: { slug: apartment.slug } }">
+        <div class="card my-router-link border m-2 border-danger rounded-4 min-height">
             <div
               v-if="apartment.img"
               class="card-img my_card shadow-lg d-flex justify-content-center border-bottom border-danger rounded-top-4"
@@ -55,7 +56,10 @@ export default {
             <p class="card-text my-3" v-if="apartment.distance"><strong><i class="fa-solid fa-ruler"></i> Distanza: </strong> {{ (apartment.distance / 1000).toFixed(1) }} Km</p>
           </div>
         </div>
+      </router-link>
   </template>
 <style lang="scss">
-    
+    .my-router-link:hover{
+      scale: 1.03;
+    }
 </style>

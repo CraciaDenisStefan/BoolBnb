@@ -17,6 +17,26 @@ class ApartmentController extends Controller
             'results'  => $apartments
         ]);
     }
+
+    public function show($slug)
+    {
+
+        $apartment = Apartment::with('services')->where('slug', $slug)->first();
+
+        if($apartment) {
+
+            return response()->json([
+                'success' => true,
+                'apartment' => $apartment
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => "Non c'è nessun appartamento"
+            ])->setStatusCode(404);
+        }
+    }
+
     public function search(Request $request){
         $n_rooms = $request->input('n_rooms');
         $n_beds = $request->input('n_beds');

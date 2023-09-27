@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/apartments', [ApartmentController::class, 'index']);
+Route::get('/apartment/{slug}', [ApartmentController::class, 'show']);
 Route::get('/apartmentsFilter', [ApartmentController::class, 'search']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('sponsors', [SponsorshipController::class, 'index'])->name('api.sponsors.index');
