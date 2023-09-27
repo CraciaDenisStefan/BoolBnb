@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from './pages/HomePage.vue';
 import SearchPage from './pages/SearchPage.vue';
 import SingleApartment from './pages/SingleApartment.vue';
+import ThankYouPage from './pages/ThankYou.vue';
 
 const router = createRouter({
 history: createWebHistory(),
@@ -27,6 +28,11 @@ routes: [
         path: '/determinato_appartamento/:slug',
         name: 'determinato_appartamento',
         component: SingleApartment
+    },
+    {
+        path: '/thank-you',
+        name: 'thank-you',
+        component: ThankYouPage 
     },
 ]
 });

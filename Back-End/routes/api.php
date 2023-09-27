@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ApartmentController;
+use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\SponsorshipController;
 
 /*
@@ -26,5 +27,6 @@ Route::get('/apartment/{slug}', [ApartmentController::class, 'show']);
 Route::get('/apartmentsFilter', [ApartmentController::class, 'search']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('sponsors', [SponsorshipController::class, 'index'])->name('api.sponsors.index');
+Route::post('/mail', [LeadController::class, 'store']);
 
 
