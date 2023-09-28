@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\SponsorshipController;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('apartments', ApartmentController::class);
     Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorships.index');
     Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
+    Route::resource('emails', LeadController::class);
 });
 
 Route::middleware('auth')->group(function () {

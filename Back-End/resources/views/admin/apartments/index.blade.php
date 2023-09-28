@@ -16,6 +16,9 @@
         <div>
           <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour">Sponsorizza appartamento</a>
         </div>
+        <div>
+          <a href="{{route('admin.emails.index')}}" class="btn primary-colour">Visualizza messaggi</a>
+        </div>
       </div>
     </div>
   </div>

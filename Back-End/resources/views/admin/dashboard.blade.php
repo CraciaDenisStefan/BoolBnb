@@ -20,7 +20,7 @@
                                 <a class="btn btn-custom primary-colour btn-large" href="{{route('admin.apartments.index')}}">Cerca
                                 <i class="fa-solid fa-map"></i>
                                 </a>
-                                <a class="btn btn-custom primary-colour btn-large" href="http://localhost:5174/">Home <i class="fa-solid fa-house"></i></a>
+                                <a class="btn btn-custom primary-colour btn-large" href="{{route('admin.emails.index')}}">Messaggi <i class="fa-solid fa-envelope"></i></a>
                             </div>
                         </div>
                     </div>

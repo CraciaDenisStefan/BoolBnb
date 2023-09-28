@@ -57,6 +57,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <a class="btn" href="http://localhost:5174/">Torna al sito</a>
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
