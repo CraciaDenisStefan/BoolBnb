@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card mt-0 box-shadow">
+<div class="background_index d-flex justify-content-center">
+    <div class="card mt-0 box-shadow col-8">
         <div class="card-body d-flex flex-column gap-3 py-3">
 
             {{-- Header --}}
@@ -14,15 +15,7 @@
 
             @if (count($apartments))
                 <div class="container">
-                    <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo
-                        una
-                        varietà
-                        di
-                        opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
-                        esigenze.
-                        Scegliete
-                        la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
-                        clienti!
+                    <p>Ampliate la visibilità del vostro appartamento con una sponsorizzazione adattabile alle vostre esigenze! Mettiamo a vostra disposizione un'ampia gamma di opzioni di sponsorizzazione, che includono sia pacchetti standard che soluzioni personalizzate. Avete la libertà di selezionare la modalità che meglio si adatta alle vostre esigenze per promuovere il vostro appartamento e catturare l'attenzione del più ampio pubblico possibile!
                     </p>
                 </div>
 
@@ -90,7 +83,8 @@
 
                     braintree.dropin.create({
                         authorization: client_token,
-                        container: '#dropin-container'
+                        container: '#dropin-container', 
+                        locale: 'it_IT',
                     }, function(createErr, instance) {
                         if (createErr) {
                             console.error(createErr);
@@ -123,6 +117,7 @@
             @endif
         </div>
     </div>
+</div>
 @endsection
 
 <style>

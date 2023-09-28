@@ -64,27 +64,39 @@ export default {
                 }
                 });
         },  
-         nonSponsoredApartments(){
-            this.nonSponsoredApartmentsArray= [];
-            this.nonSponsoredApartmentsArray = this.apartmentsFilter.filter(apartment => !apartment.sponsorships || apartment.sponsorships.length === 0 && apartment.visible);
-                const dateNow = new Date();
-                dateNow.setHours(dateNow.getHours() + 2);
-                const formattedDate = dateNow.toISOString().slice(0, 19).replace("T", " ");
-                this.apartmentsFilter.forEach(apartment => {
-                    if (
-                        apartment.sponsorships &&
-                        apartment.sponsorships.length > 0 &&
-                        apartment.visible
-                    ) {
-                        apartment.sponsorships.forEach(sponsorship => {
-                        if (new Date(formattedDate) >= new Date(sponsorship.pivot.end_date)) {
-                            // Aggiungi l'appartamento alla lista degli appartamenti sponsorizzati
-                            this.nonSponsoredApartmentsArray.push(apartment);
-                        }
-                        });
-                    }
+        nonSponsoredApartments() {
+            this.nonSponsoredApartmentsArray = [];
+            const apartmentsMap = {}; // Creare un oggetto mappa per tenere traccia degli appartamenti
+
+            const dateNow = new Date();
+            dateNow.setHours(dateNow.getHours() + 2);
+            const formattedDate = dateNow.toISOString().slice(0, 19).replace("T", " ");
+
+            // Filtra gli appartamenti non sponsorizzati e visibili
+            const nonSponsoredApartments = this.apartmentsFilter.filter(apartment => (
+                (!apartment.sponsorships || apartment.sponsorships.length === 0) && apartment.visible
+            ));
+
+            // Aggiungi gli appartamenti non sponsorizzati all'array e alla mappa
+            nonSponsoredApartments.forEach(apartment => {
+                this.nonSponsoredApartmentsArray.push(apartment);
+                apartmentsMap[apartment.id] = true; // Aggiungi l'appartamento alla mappa
+            });
+
+            // Filtra gli appartamenti sponsorizzati scaduti
+            this.apartmentsFilter.forEach(apartment => {
+                if (apartment.sponsorships && apartment.sponsorships.length > 0 && apartment.visible) {
+                    const hasValidSponsorship = apartment.sponsorships.some(sponsorship => {
+                        return new Date(formattedDate) < new Date(sponsorship.pivot.end_date);
                     });
-         },
+
+                    if (!hasValidSponsorship && !apartmentsMap[apartment.id]) {
+                        this.nonSponsoredApartmentsArray.push(apartment);
+                        apartmentsMap[apartment.id] = true; // Aggiungi l'appartamento alla mappa
+                    }
+                }
+            });
+        },
         prevSlide(){
             if(this.sliderPosition > 0){
                 this.sliderPosition -= this.itemsToShow; // Aggiorna il valore del passo
