@@ -37,12 +37,12 @@ export default {
             zoom: 15,
         });
 
-        map.addControl(new tt.FullscreenControl());
-        map.addControl(new tt.NavigationControl(), 'top-left');
-        console.log(point)
-        // map.on('load', () => {
-        //     new tt.Marker().setLngLat(point).addTo(map);
-        // });
+        //  map.addControl(new tt.FullscreenControl());
+        //  map.addControl(new tt.NavigationControl(), 'top-left');
+        // console.log(point)
+         map.on('load', () => {
+           new tt.Marker().setLngLat(point).addTo(map);
+         });
 
       } catch (error) {
         console.error('Si è verificato un errore nella richiesta al servizio di geocodifica di TomTom:', error);
@@ -126,7 +126,7 @@ export default {
                         backgroundImage: `url('${this.store.baseUrl}/storage/${apartment.img}')`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        height: '300px',
+                        height: '400px',
                         width: '100%',
                     }"
                     ></div>
@@ -137,34 +137,6 @@ export default {
                     ></div>
                 </div>                
               
-                <!-- images -->
-                <div class="d-flex thumbnail">
-                    
-                    <div v-for="( elem, index ) in apartment.images" :key="index" class="d-flex me-3 mt-3">  
-
-                        <div class="box margine content">
-
-                            <!-- wiggle -->
-                            <a :href="`#${index}`" class="wiggle">
-                                <img class="d-block" v-if="elem.url.includes('images')" :src="`${store.baseUrl}/storage/${elem.url}`" :alt="apartment.title">
-                                <img v-else class="d-block" :src="elem.url" :alt="apartment.title">
-                            </a>
-
-                            <!-- lightbox -->
-                            <div class="lightbox short-animate" :id="index">>
-                                <img class="d-block rounded p-5 mt-5" v-if="elem.url.includes('images')" :src="`${store.baseUrl}/storage/${elem.url}`"  :alt="apartment.title">
-                                <img v-else class="d-block rounded p-5 mt-5 " :src="elem.url" :alt="apartment.title">
-                            </div>
-
-                            <!-- lightbox controls -->
-                            <div id="lightbox-controls" class="short-animate">
-                                <a id="close-lightbox" class="long-animate" href="#">
-                                    Close Lightbox
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- mappa -->
                 <div id='map' class='map my-5 margine'>
@@ -301,147 +273,6 @@ export default {
     margin-top: 100px;
 
     .row {
-
-        // left
-        .left {
-
-            // over
-            .thumbnail {
-                overflow-x: auto;
-
-                // box
-                .box {
-    
-                    // wiggle
-                    .wiggle {
-            
-                        img {
-                            width: 100px;
-                            height: 100px;
-                            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                            cursor: pointer;
-                            border-radius: 10px;
-                            object-fit: cover;
-                
-                            &:hover {
-                                transform: translateY(-5px);
-                                transition: transform 0.3s ease;
-                            }
-                        }
-                    }
-
-                    // lightbox
-                    .lightbox {
-                        position:fixed;
-                        top:-100%;
-                        bottom:100%;
-                        left:0;
-                        right:0;
-                        background:rgba(0, 0, 0, 0.496);
-                        z-index:501;
-                        opacity:0;
-
-                        img {
-                            position:absolute;
-                            margin:auto;
-                            top:0;
-                            left:0;
-                            right:0;
-                            bottom:0;
-                            max-width:100%;
-                            max-height:95%;
-                            object-fit: contain;
-                        }
-
-                        &:target {
-                            top:0%;
-                            bottom:0%;
-                            opacity:1;
-                        }
-
-                        &:target img {
-                            max-width:100%;
-                            max-height:95%;
-                            box-shadow: none;
-                            border-radius: 20px;
-                        }
-
-                        &:target ~ #lightbox-controls {
-                            top:0px;
-                        }
-
-                        &:target ~ #lightbox-controls #close-lightbox:after {
-                            width:50px;
-                        }
-
-                        &:target ~ #lightbox-controls #close-lightbox:before {
-                            height:50px;
-                        }
-                    }
-                    
-                    // lightbox-controls
-                    #lightbox-controls {
-                        position:fixed;
-                        height:70px;
-                        width:70px;
-                        top:-70px;
-                        right:0;
-                        z-index:502;
-                        background:rgba(0,0,0,.1);
-                    
-                        #close-lightbox {
-                            display:block;
-                            position:absolute;
-                            overflow:hidden;
-                            height:50px;
-                            width:50px;
-                            text-indent:-5000px;
-                            right:10px;
-                            top:80px;
-                            -webkit-transform:rotate(45deg);
-                            -moz-transform:rotate(45deg);
-                            -ms-transform:rotate(45deg);
-                            -o-transform:rotate(45deg);
-                            transform:rotate(45deg);
-                            
-                            &:before {
-                                content:'';
-                                display:block;
-                                position:absolute;
-                                height:0px;
-                                width:3px;
-                                left:24px;
-                                top:0;
-                                background:white;
-                                border-radius:2px;
-                                -webkit-transition: .5s .5s ease-in-out;
-                                -moz-transition: .5s .5s ease-in-out;
-                                -ms-transition: .5s .5s ease-in-out;
-                                -o-transition:.5s .5s ease-in-out;
-                                transition:.5s .5s ease-in-out;
-                            }
-                            
-                            &:after {
-                                content:'';
-                                display:block;
-                                position:absolute;
-                                width:0px;
-                                height:3px;
-                                top:24px;
-                                left:0;
-                                background:white;
-                                border-radius:2px;
-                                -webkit-transition: .5s 1s ease-in-out;
-                                -moz-transition: .5s 1s ease-in-out;
-                                -ms-transition: .5s 1s ease-in-out;
-                                -o-transition:.5s 1s ease-in-out;
-                                transition:.5s 1s ease-in-out;
-                            }
-                        }
-                    }
-                }
-            }
-
             // maps
             .map {
                 aspect-ratio: 3/2;
@@ -468,87 +299,6 @@ export default {
             }
         }
     }
-}
-
-.margine {
-    margin-top: 40px;
-}
 
 
-.short-animate {
-    -webkit-transition:.5s ease-in-out;
-    -moz-transition:.5s ease-in-out;
-    -ms-transition:.5s ease-in-out;
-    -o-transition:.5s ease-in-out;
-    transition:.5s ease-in-out;
-}
-
-.tt-fullscreen-control button {
-  background-color: #C6AB7C; /* Cambia il colore di sfondo */
-  color: white; /* Cambia il colore del testo */
-  border: none; /* Rimuovi i bordi se necessario */
-}
-
-/* Selettore per il controllo di navigazione */
-.tt-navigation-control button {
-  background-color: #C6AB7C; /* Cambia il colore di sfondo */
-  color: white; /* Cambia il colore del testo */
-  border: none; /* Rimuovi i bordi se necessario */
-}
-
-.long-animate {
-    -webkit-transition: .5s .5s ease-in-out;
-    -moz-transition: .5s .5s ease-in-out;
-    -ms-transition: .5s .5s ease-in-out;
-    -o-transition:.5s .5s ease-in-out;
-    transition:.5s .5s ease-in-out;
-}
-
-    @media (max-width: 1024px) { 
-        .container {
-            .row {
-                .right {
-                    ul {
-                        li {
-                            h2 {
-                                font-size: 1.8rem;
-                            }
-
-                            h6 {
-                                font-size: 0.9rem;
-                            }
-                        }
-                    }
-
-                    h4 {
-                        font-size: 1.4rem;
-                    }
-                }
-            }
-        }
-    }
-
-    @media (max-width: 768px) { 
-        .container {
-            .row {
-                .right {
-                    ul {
-                        li {
-                            h2 {
-                                font-size: 1.4rem;
-                            }
-
-                            h6 {
-                                font-size: 0.9rem;
-                            }
-                        }
-                    }
-
-                    h4 {
-                        font-size: 1.2rem;
-                    }
-                }
-            }
-        }
-    }
 </style>
