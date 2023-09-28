@@ -466,7 +466,7 @@ export default {
                 box-shadow: rgba(50, 50, 93, 0.20) 0px 10px 30px -20px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             
                 .btn {
-                    background-color: #C6AB7C;
+                    background-color: #d77981;
                     color: white;
                 }
             }
