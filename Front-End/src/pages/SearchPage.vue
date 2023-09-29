@@ -46,9 +46,13 @@ export default {
     methods: {
         registerView(apartmentId) {
             console.log(apartmentId)
-            axios.post(`${this.store.baseUrl}/api/views/${apartmentId}`).then(response => {
-                    console.log('ciao')
-                })
+            const data = {
+                apartmentId: apartmentId
+            } 
+            axios.post(`${this.store.baseUrl}/api/view`, data ).then( response => {
+                console.log(response)
+                this.success = response.data.success;
+            });
             },
         sponsoredApartments(){
             this.sponsoredApartmentsArray= [];

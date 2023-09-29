@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Route;
 use App\Models\View;
+use App\Models\Apartment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -38,14 +40,20 @@ class ViewController extends Controller
      */
     public function store(Request $request)
     {
-        // Ora puoi utilizzare $apartment per accedere all'appartamento associato all'ID
-        $data = $request->validate([
-            'ipAddress' => 'required|ip',
-        ]);
-    
+        // Ora puoi utilizzare $apartmentId per ottenere l'appartamento associato all'ID
+        $apartmentId = $request->input('apartmentId');
+        
+        // Otteni l'appartamento associato all'ID
+        $apartment = Apartment::find($apartmentId);
+
+        // Verifica se l'appartamento è stato trovato
+        if (!$apartment) {
+            return response()->json(['error' => 'Appartamento non trovato'], 404);
+        }
+
         // Registra la visualizzazione nella tabella views associandola all'appartamento
         $apartment->views()->create([
-            'ip_address' => $data['ipAddress'],
+            'ip_address' => 'poi ce lo metto',
         ]);
     
         return response()->json(['message' => 'Visualizzazione registrata con successo']);

@@ -29,7 +29,7 @@ Route::get('/apartmentsFilter', [ApartmentController::class, 'search']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('sponsors', [SponsorshipController::class, 'index'])->name('api.sponsors.index');
 Route::post('/mail', [LeadController::class, 'store']);
-Route::post('/views/{apartment_id}', [ViewController::class, 'store']);
+Route::post('/view', [ViewController::class, 'store']);
 
 
 
