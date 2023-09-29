@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card mt-0 box-shadow">
-        <div class="card-body d-flex flex-column gap-3 py-3">
+<div class="background_index">    
+    <div class="card mt-0 box-shadow main-background-color">
+        <div class="card-body d-flex flex-column gap-3 py-3" style="background-color: rgba(255, 255, 255, 0)">
 
             {{-- Header --}}
-            <div class="container">
+            <div class="container main-background-color main-box-shadow p-3">
                 <div class="d-inline-block text-gradient">
                     <h1>Sponsorizza Appartamenti</h1>
                 </div>
@@ -13,7 +14,7 @@
             </div>
 
             @if (count($apartments))
-                <div class="container">
+                <div class="container main-background-color main-box-shadow p-3">
                     <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo
                         una
                         varietà
@@ -26,12 +27,12 @@
                     </p>
                 </div>
 
-                <div class="container">
+                <div class="container main-background-color form-box-shadow p-3"style="background-color: rgba(255, 255, 255, 0)">
                     <form id="payment-form" action="{{ route('admin.process_payment') }}" method="post"
-                        class="col-12 col-lg-6 mx-auto">
+                        class="col-12 col-lg-6 mx-auto main-background-color form-box-shadow">
                         @csrf
-                        <div class="card mb-3" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
-                            <div class="card-body">
+                        <div class="card mb-3 main-background-color">
+                            <div class="card-body main-background-color form-box-shadow">
                                 <h2 class="card-title">Acquista una sponsorizzazione</h2>
                                 <div class="form-group">
                                     <label for="sponsorship_id">Seleziona un pacchetto:</label><br>
@@ -123,6 +124,7 @@
             @endif
         </div>
     </div>
+                </div>    
 @endsection
 
 <style>

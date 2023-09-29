@@ -74,7 +74,7 @@ export default {
         <div class="d-flex justify-content-center mb-4">
             <div>
                 <label for="address">Indirizzo</label>
-                <input type="text" id="address" class="form-control rounded-3" placeholder="Indirizzo" @keyup.enter="redirectToSearch()" @keyup="this.autoAddress" v-model="store.address">
+                <input type="text" id="address" class="form-control rounded-3 form-box-shadow" placeholder="Indirizzo" @keyup.enter="redirectToSearch()" @keyup="this.autoAddress" v-model="store.address">
                 <ul @click="redirectToSearch()" id="autocomplete-list" class="list-group box-list"></ul>
             </div>
         </div>
