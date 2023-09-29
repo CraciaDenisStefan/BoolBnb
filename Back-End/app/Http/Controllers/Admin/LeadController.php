@@ -37,7 +37,7 @@ class LeadController extends Controller
         $userApartmentIds = $userApartments->pluck('id')->toArray();
     
         // Recupera i messaggi associati agli appartamenti dell'utente
-        $emails = Lead::whereIn('apartment_id', $userApartmentIds)->get();
+        $emails = Lead::whereIn('apartment_id', $userApartmentIds)->orderBy('created_at', 'desc')->get();
     
         // Restituisci la vista con i dati
         return view('admin.emails.index', compact('emails', 'message', 'messageNoAuth', 'userApartments'));
