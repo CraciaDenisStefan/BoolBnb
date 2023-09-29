@@ -114,6 +114,7 @@
             <div class="d-flex justify-content-center">
               <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
               <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a class="btn btn-sm btn-success mx-2" href="{{ route('admin.views.index', ['apartment' => $apartment->id]) }}"><i class="fa-solid fa-chart-line"></i></a>
               <form class="form-delete delete-apartment-form" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
                 @csrf
                 @method('DELETE')

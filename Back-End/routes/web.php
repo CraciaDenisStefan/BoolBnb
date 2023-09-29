@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\SponsorshipController;
+use App\Http\Controllers\Admin\ViewController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 
 /*
@@ -29,6 +30,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorships.index');
     Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
     Route::resource('emails', LeadController::class);
+    Route::get('views/{apartment}', [ViewController::class, 'index'])->name('views.index');
+
 });
 
 Route::middleware('auth')->group(function () {

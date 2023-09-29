@@ -18,6 +18,7 @@
         "@tomtom-international/web-sdk-maps": "^6.25.0",
         "@tomtom-international/web-sdk-services": "^6.25.0",
         "bootstrap": "^5.2.2",
+        "chart.js": "^4.4.0",
         "lord-icon-element": "^4.1.1",
         "lottie-web": "^5.12.2"
     }

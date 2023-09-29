@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Lead;
 use App\Models\Service;
+use App\Models\View;
 use App\Models\Sponsorship;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,10 @@ class Apartment extends Model
     }
 
     public function leads() {
-        return $this->hasMany(Leads::class);
+        return $this->hasMany(Lead::class);
+    }
+
+    public function views() {
+        return $this->hasMany(View::class);
     }
 }
