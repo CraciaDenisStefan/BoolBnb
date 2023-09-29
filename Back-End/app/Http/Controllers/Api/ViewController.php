@@ -53,7 +53,7 @@ class ViewController extends Controller
 
         // Registra la visualizzazione nella tabella views associandola all'appartamento
         $apartment->views()->create([
-            'ip_address' => 'poi ce lo metto',
+            'ip_address' => $_SERVER['REMOTE_ADDR'],
         ]);
     
         return response()->json(['message' => 'Visualizzazione registrata con successo']);
