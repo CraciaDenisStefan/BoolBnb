@@ -239,49 +239,47 @@ export default {
     <AppLoading v-if="store.loading" />
     <div v-else class="container">
         <form action="">
-            <div class="row">
-                <div class="col-12 d-md-flex justify-content-between align-items-center main-background-color main-box-shadow p-3">
+            <div class="col-12 d-md-flex justify-content-between align-items-center main-background-color main-box-shadow p-3">
+            <div class="me-3 my-3">
+                    <label for="address">Indirizzo</label>
+                    <input
+                        type="text"
+                        id="address"
+                        class="form-control me-2 rounded-3 form-box-shadow"
+                        placeholder="Indirizzo"
+                        @keyup="autoAddress"
+                        v-model="store.address"
+                    />
+                    <ul id="autocomplete-list" class="list-group box-list"></ul>
+                </div>
                 <div class="me-3 my-3">
-                        <label for="address">Indirizzo</label>
-                        <input
-                            type="text"
-                            id="address"
-                            class="form-control me-2 rounded-3 form-box-shadow"
-                            placeholder="Indirizzo"
-                            @keyup="autoAddress"
-                            v-model="store.address"
-                        />
-                        <ul id="autocomplete-list" class="list-group box-list"></ul>
-                    </div>
-                    <div class="me-3 my-3">
-                        <label for="range">Raggio di ricerca</label>
-                        <input
-                            type="number"
-                            id="range"
-                            class="form-control me-2 rounded-3 form-box-shadow"
-                            placeholder="Raggio di ricerca"
-                            min="20"
-                            v-model="range"
-                        />
-                    </div>
-                    <div class="me-3 my-3">
-                        <label>Numero di stanze</label>
-                        <input
-                            type="number"
-                            class="form-control me-2 rounded-3 form-box-shadow"
-                            placeholder="Numero di stanze"
-                            v-model="n_rooms"
-                        />
-                    </div>
-                    <div class="me-3 my-3">
-                        <label>Posti letto</label>
-                        <input
-                            type="number"
-                            class="form-control rounded-3 form-box-shadow"
-                            placeholder="Posti letto"
-                            v-model="n_beds"
-                        />
-                    </div>
+                    <label for="range">Raggio di ricerca</label>
+                    <input
+                        type="number"
+                        id="range"
+                        class="form-control me-2 rounded-3 form-box-shadow"
+                        placeholder="Raggio di ricerca"
+                        min="20"
+                        v-model="range"
+                    />
+                </div>
+                <div class="me-3 my-3">
+                    <label>Numero di stanze</label>
+                    <input
+                        type="number"
+                        class="form-control me-2 rounded-3 form-box-shadow"
+                        placeholder="Numero di stanze"
+                        v-model="n_rooms"
+                    />
+                </div>
+                <div class="me-3 my-3">
+                    <label>Posti letto</label>
+                    <input
+                        type="number"
+                        class="form-control rounded-3 form-box-shadow"
+                        placeholder="Posti letto"
+                        v-model="n_beds"
+                    />
                 </div>
             </div>
             <div class="d-flex align-items-center justify-content-between my-4 main-background-color main-box-shadow p-3">

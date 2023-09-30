@@ -44,9 +44,9 @@
                         <li class="list-group-item main-background-color">
                             <div>
                                 @if($apartment->visible)
-                                    <i class="fa-solid fa-eye"></i> <strong>Visibile: </strong> <i class="fa-solid fa-check" style="color: #00ff00;"></i>
+                                    <i class="fa-solid fa-eye"></i> <strong>Visibile </strong> <i class="fa-solid fa-check" style="color: #00ff00;"></i>
                                 @else
-                                    <i class="fa-solid fa-eye-slash"></i> <strong>Visibile: </strong> <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
+                                    <i class="fa-solid fa-eye-slash"></i> <strong>Visibile </strong> <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
                                 @endif
                             </div>
                         </li>
@@ -61,6 +61,36 @@
                             @else
                                 <p>Nessun servizio.</p>
                             @endif
+                        </li>
+                        <li class="list-group-item main-background-color">
+                        <?php
+                            $currentTimestamp = time(); // Ottieni il timestamp UNIX corrente
+                            $currentDate = strtotime('now'); // Converti il timestamp corrente in un oggetto DateTime
+                            date_default_timezone_set('Europe/Rome'); // Imposta il fuso orario a Roma
+                            
+                            if (count($apartment->sponsorships) > 0) {
+                                $isSponsored = false;
+                            
+                                foreach ($apartment->sponsorships as $sponsorship) {
+                                    $endDate = strtotime($sponsorship->pivot->end_date); // Converti la data di fine in timestamp
+                            
+                                    if ($currentTimestamp < $endDate) {
+                                        // L'appartamento è sponsorizzato
+                                        $isSponsored = true;
+                                        break; // Non c'è bisogno di continuare a controllare le altre sponsorizzazioni
+                                    }
+                                }
+                            
+                                if ($isSponsored) {
+                                    echo "<p><strong>Sponsorizzato fino al</strong> <br>" . $sponsorship->pivot->end_date . "</p>";
+                                } else {
+                                    echo '<p>Non sponsorizzato</p>';
+                                }
+                            } else {
+                                echo '<p">Non sponsorizzato</p>';
+                            }
+                            
+                            ?>
                         </li>
                     </ul>
                 </div>

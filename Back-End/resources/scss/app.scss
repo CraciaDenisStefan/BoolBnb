@@ -19,6 +19,10 @@
     /* Imposta l'altezza massima per il container prima che la scrollbar appaia */
 }
 
+.z-index{
+    z-index: 9999999999999999999999999999999999999999999999999999999999999999999;
+}
+
 
 .background_index::before {
     content: "";

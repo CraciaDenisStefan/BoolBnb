@@ -23,7 +23,7 @@
     <div id="app">
 
 
-        <header id="myHeader" class="p-0 navbar navbar-expand-md fixed-top">
+        <header id="myHeader" class="p-0 navbar navbar-expand-md fixed-top z-index">
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
                     <div class="logo">
