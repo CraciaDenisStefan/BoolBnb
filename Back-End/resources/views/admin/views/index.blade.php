@@ -12,6 +12,9 @@
             <canvas id="myChart"></canvas>
         </div>
     </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <a href="{{route('admin.apartments.index')}}" class="btn primary-colour rounded-3 ps-3 pe-3 mt-4" style="margin-right: 15px;">Torna ai tuoi appartamenti</a>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

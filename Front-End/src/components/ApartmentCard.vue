@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store.js';
 export default {
     props: {
@@ -17,12 +18,22 @@ export default {
           return text.substr(0, this.maxCaracters) + '...';
         }
           return text
-      }
+      },
+      registerView(apartmentId) {
+            console.log(apartmentId)
+            const data = {
+                apartmentId: apartmentId
+            } 
+            axios.post(`${this.store.baseUrl}/api/view`, data ).then( response => {
+                console.log(response)
+                this.success = response.data.success;
+            });
+        },
     }
 }
 </script>
 <template>
-      <router-link class="text-decoration-none" :to="{ name: 'determinato_appartamento', params: { slug: apartment.slug } }">
+      <router-link class="text-decoration-none" @click="registerView(apartment.id)" :to="{ name: 'determinato_appartamento', params: { slug: apartment.slug } }">
         <div class="card my-router-link m-2 rounded-4 min-height main-box-shadow">
             <div
               v-if="apartment.img"

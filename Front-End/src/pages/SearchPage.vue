@@ -44,16 +44,6 @@ export default {
         this.handleWindowResize(); // Aggiungi un ascoltatore per il ridimensionamento
     },
     methods: {
-        registerView(apartmentId) {
-            console.log(apartmentId)
-            const data = {
-                apartmentId: apartmentId
-            } 
-            axios.post(`${this.store.baseUrl}/api/view`, data ).then( response => {
-                console.log(response)
-                this.success = response.data.success;
-            });
-            },
         sponsoredApartments(){
             this.sponsoredApartmentsArray= [];
             const dateNow = new Date();
@@ -334,7 +324,7 @@ export default {
                 <h1>Appartamenti in evidenza</h1>
                 <div class="row">
                     <div v-for="apartment in sponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
-                        <ApartmentCard :apartment="apartment" />
+                        <ApartmentCard :apartment="apartment"/>
                     </div>
                 </div>
             </div>
@@ -345,7 +335,7 @@ export default {
                 <h1>Altri Appartamenti</h1>
                 <div class="row">
                     <div v-for="apartment in nonSponsoredApartmentsArray" :key="apartment.id" class="col-12 col-md-6 col-lg-4 mb-4">
-                        <ApartmentCard :apartment="apartment" @click="registerView(apartment.id)"/>
+                        <ApartmentCard :apartment="apartment"/>
                     </div>
                 </div>
             </div>
