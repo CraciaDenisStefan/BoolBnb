@@ -10,7 +10,7 @@
         </div>
 
         <div class="container">
-            <div class="row">
+            <div class="row main-background-color main-box-shadow p-3">
                 <div class="col-md-6">
                     <h2>Come Funziona</h2>
                     <p>

@@ -121,7 +121,7 @@ export default {
                 <div>
                     <div
                     v-if="apartment.img"
-                    class=""
+                    class="main-box-shadow"
                     :style="{
                         backgroundImage: `url('${this.store.baseUrl}/storage/${apartment.img}')`,
                         backgroundSize: 'cover',
@@ -174,7 +174,7 @@ export default {
             <!-- details -->
             <div class="right col-12 col-md-12 col-lg-5 px-4">
             
-                    <div class="card p-3">
+                    <div class="card p-3 main-background-color main-box-shadow p-3">
     
                     <!-- title and address -->
                     <ul class="p-0">
@@ -218,7 +218,7 @@ export default {
                         <h5 class="mt-3 mb-2"> Servizi della struttura</h5>
                         <div class="d-flex flex-wrap gap-2">
     
-                            <span v-for="( elem, index ) in apartment.services" :key="index" class="p-1 mt-1 card d-inline"> 
+                            <span v-for="( elem, index ) in apartment.services" :key="index" class="p-2 mt-1 card d-inline form-box-shadow"> 
                                 <i :class="`fa-solid ${ elem.icon } me-1`"></i> {{  elem.name }} 
                             </span>
                         </div>
@@ -226,13 +226,13 @@ export default {
             </div>
 
                 <!-- form contatta la truttura -->
-                <form class="card p-4 mt-5 mb-4 margine" @submit.prevent="sendForm()">
+                <form class="card p-4 mt-5 mb-4 margine main-background-color main-box-shadow" @submit.prevent="sendForm()">
                     <h3 class="mb-2">Contatta la struttura</h3>
 
                     <!-- name -->
                     <div class="mb-3">
                         <label for="" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name" placeholder="Nome" name="name" v-model="name">
+                        <input type="text" class="form-control form-box-shadow" id="name" placeholder="Nome" name="name" v-model="name">
                         <p v-for="(error, index) in errors.name" :key="index" class="text-danger">
                             {{ error }}
                         </p>
@@ -241,7 +241,7 @@ export default {
                     <!-- email -->
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" v-model="email">
+                        <input type="email" class="form-control form-box-shadow" id="email" placeholder="name@example.com" name="email" v-model="email">
                         <p v-for="(error, index) in errors.email" :key="index" class="text-danger">
                             {{ error }}
                         </p>
@@ -251,7 +251,7 @@ export default {
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="" class="form-label">Messaggio</label>
-                            <textarea class="form-control" id="content" rows="3" name="content" v-model="content"></textarea>
+                            <textarea class="form-control form-box-shadow" id="content" rows="3" name="content" v-model="content"></textarea>
                             <p v-for="(error, index) in errors.content" :key="index" class="text-danger">
                                 {{ error }}
                             </p>
@@ -262,7 +262,7 @@ export default {
                     <input type="hidden" name="apartment_id" id="apartment_id" v-model="apartment_id">
     
                     <!-- button -->
-                    <button type="submit" class="btn" :disabled="loading">
+                    <button type="submit" class="btn primary-colour rounded-3 ps-3 pe-3" :disabled="loading">
                         <span v-if="!loading">Invia</span>
                         <span v-else>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -464,11 +464,6 @@ export default {
             // form
             form {
                 box-shadow: rgba(50, 50, 93, 0.20) 0px 10px 30px -20px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-            
-                .btn {
-                    background-color: #d77981;
-                    color: white;
-                }
             }
         }
     }

@@ -250,13 +250,13 @@ export default {
     <div v-else class="container">
         <form action="">
             <div class="row">
-                <div class="col-12 d-md-flex justify-content-between align-items-center">
+                <div class="col-12 d-md-flex justify-content-between align-items-center main-background-color main-box-shadow p-3">
                 <div class="me-3 my-3">
                         <label for="address">Indirizzo</label>
                         <input
                             type="text"
                             id="address"
-                            class="form-control me-2 rounded-3"
+                            class="form-control me-2 rounded-3 form-box-shadow"
                             placeholder="Indirizzo"
                             @keyup="autoAddress"
                             v-model="store.address"
@@ -268,7 +268,7 @@ export default {
                         <input
                             type="number"
                             id="range"
-                            class="form-control me-2 rounded-3"
+                            class="form-control me-2 rounded-3 form-box-shadow"
                             placeholder="Raggio di ricerca"
                             min="20"
                             v-model="range"
@@ -278,7 +278,7 @@ export default {
                         <label>Numero di stanze</label>
                         <input
                             type="number"
-                            class="form-control me-2 rounded-3"
+                            class="form-control me-2 rounded-3 form-box-shadow"
                             placeholder="Numero di stanze"
                             v-model="n_rooms"
                         />
@@ -287,14 +287,14 @@ export default {
                         <label>Posti letto</label>
                         <input
                             type="number"
-                            class="form-control rounded-3"
+                            class="form-control rounded-3 form-box-shadow"
                             placeholder="Posti letto"
                             v-model="n_beds"
                         />
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-center justify-content-between my-4">
+            <div class="d-flex align-items-center justify-content-between my-4 main-background-color main-box-shadow p-3">
                 <button class="slider-control" @click.prevent="moveSlide('prev')"><i class="fa-solid fa-arrow-left"></i></button>
                 <div class="d-flex align-items-center justify-content-between">
                     <div
@@ -324,8 +324,8 @@ export default {
                 <button class="slider-control" @click.prevent="moveSlide('next')"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
             <div class="d-flex align-items-center justify-content-center">
-                <button class="btn primary-colour mx-3" @click="filterApartments" type="button">Filtra</button>
-                <button class="btn primary-colour" @click="resetFilters" type="button">Reset</button>
+                <button class="btn primary-colour rounded-3 ps-3 pe-3" @click="filterApartments" type="button">Filtra</button>
+                <button class="btn primary-colour rounded-3 ps-3 pe-3 mx-3" @click="resetFilters" type="button">Reset</button>
             </div>
         </form>
        

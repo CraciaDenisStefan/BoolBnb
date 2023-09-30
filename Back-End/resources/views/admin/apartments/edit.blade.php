@@ -8,7 +8,7 @@
             <div class="col-12 my-3">
                 <div class="d-flex justify-content-between align-items-center main-background-color main-box-shadow edit-padding">
                     <h2 style="padding-left: 15px;">Modifica Appartamento</h2>
-                    <a href=" {{ route('admin.apartments.index')}} " class="btn primary-colour" style="margin-right: 15px;">Tutte le proprietà</a>
+                    <a href=" {{ route('admin.apartments.index')}} " class="btn primary-colour rounded-3 ps-3 pe-3" style="margin-right: 15px;">Tutte le proprietà</a>
                 </div>
                 <div>
                     @if($errors->any())
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                         <div class="class-group my-3">
-                            <button type="submit" class="btn btn-primary btn-success">Modifica appartamento</button>
+                            <button type="submit" class="btn primary-colour rounded-3 ps-3 pe-3">Modifica appartamento</button>
                         </div>
                     </form>
                 </div>

@@ -23,10 +23,10 @@ export default {
 </script>
 <template>
       <router-link class="text-decoration-none" :to="{ name: 'determinato_appartamento', params: { slug: apartment.slug } }">
-        <div class="card my-router-link border m-2 border-danger rounded-4 min-height">
+        <div class="card my-router-link m-2 rounded-4 min-height main-box-shadow">
             <div
               v-if="apartment.img"
-              class="card-img my_card shadow-lg d-flex justify-content-center border-bottom border-danger rounded-top-4"
+              class="card-img my_card d-flex justify-content-center"
               :style="{
                 backgroundImage: `url('${this.store.baseUrl}/storage/${apartment.img}')`,
                 backgroundSize: 'cover',

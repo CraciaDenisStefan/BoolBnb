@@ -6,15 +6,15 @@
 <div class="background_index">
   <div class="container">
     <div class="col-12 col-sm-6 col-md-3 py-5 w-100">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center main-background-color main-box-shadow p-3">
         <div>
-          <a href="{{route('admin.dashboard')}}" class="btn primary-colour">Torna alla dashboard</a>
+          <a href="{{route('admin.dashboard')}}" class="btn primary-colour rounded-3 ps-3 pe-3" style="margin-left: 15px;">Torna alla dashboard</a>
         </div>
         <div>
-          <a href="{{route('admin.apartments.create')}}" class="btn primary-colour">Aggiungi un appartamento</a>
+          <a href="{{route('admin.apartments.create')}}" class="btn primary-colour rounded-3 ps-3 pe-3">Aggiungi un appartamento</a>
         </div>
         <div>
-          <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour">Sponsorizza appartamento</a>
+          <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour rounded-3 ps-3 pe-3" style="margin-right: 15px;">Sponsorizza appartamento</a>
         </div>
         <div>
           <a href="{{route('admin.emails.index')}}" class="btn primary-colour">Visualizza messaggi</a>
@@ -42,21 +42,21 @@
     <div>
       <h3>I tuoi appartamenti</h3>
     </div>
-    <table class="table">
+    <table class="table main-box-shadow">
       <thead>
         <tr>
-          <th></th>
-          <th>Titolo</th>
-          <th class="d-none d-md-block">Descrizione</th>
-          <th class="text-center">Visibilità</th>
-          <th class="text-center">Sponzorizzato</th>
-          <th class="text-center">Azioni</th>
+          <th class="main-background-color"></th>
+          <th class="main-background-color">Titolo</th>
+          <th class="d-none d-md-block main-background-color">Descrizione</th>
+          <th class="text-center main-background-color">Visibilità</th>
+          <th class="text-center main-background-color">Sponzorizzato</th>
+          <th class="text-center main-background-color">Azioni</th>
         </tr>
       </thead>
       <tbody>
         @foreach($apartments as $apartment)
         <tr>
-          <td>
+          <td class="main-background-color">
             @if($apartment->img)
               <div class="card-img d-none d-md-block  my_card shadow-lg"
                 style="background-image:url('{{ asset('storage/'.$apartment->img) }}'); background-size: cover; background-position: center;">
@@ -67,20 +67,20 @@
               </div>
             @endif
           </td>
-          <td>{{$apartment->title}}</td>
-          <td class="truncate-text display-none">
-            <div class="">
+          <td class="main-background-color">{{$apartment->title}}</td>
+          <td class="truncate-text display-none main-background-color">
+            <div>
               {{$apartment->description}}
             </div>
           </td>
-          <td>
+          <td class="main-background-color">
             @if($apartment->visible)
               <p class="text-center"><i class="fa-solid fa-eye" style="color: #00ff00;"></i> </p>
             @else
               <p class="text-center"><i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i></p> 
             @endif
           </td>
-          <td>
+          <td class="main-background-color">
             <?php
               $currentTimestamp = time(); // Ottieni il timestamp UNIX corrente
               $currentDate = strtotime('now'); // Converti il timestamp corrente in un oggetto DateTime
@@ -110,7 +110,7 @@
               
             ?>
           </td>
-          <td>
+          <td class="main-background-color">
             <div class="d-flex justify-content-center">
               <a class="btn btn-sm btn-primary" href="{{route('admin.apartments.show', $apartment->id)}}"><i class="fa-solid fa-eye"></i></a>
               <a class="btn btn-sm btn-warning mx-2" href="{{route('admin.apartments.edit', $apartment->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
