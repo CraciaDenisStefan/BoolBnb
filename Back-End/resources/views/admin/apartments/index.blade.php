@@ -6,19 +6,11 @@
 <div class="background_index">
   <div class="container">
     <div class="col-12 col-sm-6 col-md-3 py-5 w-100">
-      <div class="d-flex justify-content-between align-items-center main-background-color main-box-shadow p-3">
-        <div>
-          <a href="{{route('admin.dashboard')}}" class="btn primary-colour rounded-3 ps-3 pe-3" style="margin-left: 15px;">Torna alla dashboard</a>
-        </div>
-        <div>
-          <a href="{{route('admin.apartments.create')}}" class="btn primary-colour rounded-3 ps-3 pe-3">Aggiungi un appartamento</a>
-        </div>
-        <div>
-          <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour rounded-3 ps-3 pe-3" style="margin-right: 15px;">Sponsorizza appartamento</a>
-        </div>
-        <div>
-          <a href="{{route('admin.emails.index')}}" class="btn primary-colour">Visualizza messaggi</a>
-        </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center main-background-color main-box-shadow p-3">
+          <a href="{{route('admin.dashboard')}}" class="btn primary-colour rounded-3 me-md-2 mb-2 mb-md-0 w-100">Torna alla dashboard</a>
+          <a href="{{route('admin.apartments.create')}}" class="btn primary-colour rounded-3 me-md-2 mb-2 mb-md-0 w-100">Aggiungi un appartamento</a>
+          <a href="{{route('admin.sponsorships.index')}}" class="btn primary-colour rounded-3 me-md-2 mb-2 mb-md-0 w-100 w-100">Sponsorizza appartamento</a>
+          <a href="{{route('admin.emails.index')}}" class="btn primary-colour w-100">Visualizza messaggi</a>
       </div>
     </div>
   </div>
@@ -48,8 +40,8 @@
           <th class="main-background-color"></th>
           <th class="main-background-color">Titolo</th>
           <th class="d-none d-md-block main-background-color">Descrizione</th>
-          <th class="text-center main-background-color">Visibilità</th>
-          <th class="text-center main-background-color">Sponzorizzato</th>
+          <th class="text-center main-background-color display-none">Visibilità</th>
+          <th class="text-center main-background-color display-none">Sponzorizzato</th>
           <th class="text-center main-background-color">Azioni</th>
         </tr>
       </thead>
@@ -73,14 +65,14 @@
               {{$apartment->description}}
             </div>
           </td>
-          <td class="main-background-color">
+          <td class="main-background-color display-none">
             @if($apartment->visible)
               <p class="text-center"><i class="fa-solid fa-eye" style="color: #00ff00;"></i> </p>
             @else
               <p class="text-center"><i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i></p> 
             @endif
           </td>
-          <td class="main-background-color">
+          <td class="main-background-color display-none">
             <?php
               $currentTimestamp = time(); // Ottieni il timestamp UNIX corrente
               $currentDate = strtotime('now'); // Converti il timestamp corrente in un oggetto DateTime

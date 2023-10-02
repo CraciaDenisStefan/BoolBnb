@@ -6,13 +6,9 @@
 <div class="background_index">
   <div class="container">
     <div class="col-12 col-sm-6 col-md-3 py-5 w-100">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <a href="{{route('admin.dashboard')}}" class="btn primary-colour">Torna alla dashboard</a>
-        </div>
-        <div>
-          <a href="{{route('admin.apartments.index')}}" class="btn primary-colour">Torna ai tuoi appartamenti</a>
-        </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <a href="{{route('admin.dashboard')}}" class="btn primary-colour me-md-2 mb-2 mb-md-0 ">Torna alla dashboard</a>
+          <a href="{{route('admin.apartments.index')}}" class="btn primary-colour me-md-2 mb-2 mb-md-0 ">Torna ai tuoi appartamenti</a>
       </div>
     </div>
   </div>
@@ -41,9 +37,9 @@
         <tr>
           <th></th>
           <th>Appartamento</th>
-          <th class="d-none d-md-block">Nome</th>
-          <th class="text-center">Email</th>
-          <th class="text-center">Messaggio</th>
+          <th>Nome</th>
+          <th class="text-center display-none">Email</th>
+          <th class="text-center display-none">Messaggio</th>
           <th class="text-center">Azioni</th>
         </tr>
       </thead>
@@ -65,7 +61,7 @@
           <td>
             {{$email->name}}
           </td>
-          <td>
+          <td class="display-none">
             {{$email->email}}
           </td>
           <td class="truncate-text display-none">
