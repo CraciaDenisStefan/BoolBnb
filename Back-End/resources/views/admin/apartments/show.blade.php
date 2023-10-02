@@ -23,14 +23,14 @@
                
                 
             </div>
-            <div class="col-12 col-md-6">
+            <div class=" col-12 col-lg-6 d-flex align-items-center justify-content-center">
                 @if($apartment->img)
-                    <img class="img-fluid w-100 h-100 form-box-shadow" src="{{ asset('storage/'. $apartment->img) }}">
+                    <img class="img-fluid  form-box-shadow" src="{{ asset('storage/'. $apartment->img) }}" style="max-width: 100%; max-height:100% object-fit:contain;">
                 @else
-                    <img class="img-fluid w-100 h-100 form-box-shadow" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png">
+                    <img class="img-fluid  form-box-shadow" src="https://vestnorden.com/wp-content/uploads/2018/03/house-placeholder.png" style="max-width: 100%; max-height:100% object-fit:contain;">
                 @endif
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center">
                 <div class="card my-4 main-background-color main-box-shadow" style="width: 18rem;">
                     <div class="card-header">
                       Informazioni:
