@@ -232,7 +232,7 @@ export default {
                     <!-- name -->
                     <div class="mb-3">
                         <label for="" class="form-label">Nome</label>
-                        <input type="text" class="form-control form-box-shadow" id="name" placeholder="Nome" name="name" v-model="name">
+                        <input type="text" class="form-control form-box-shadow" id="name" placeholder="Nome" name="name" v-model="name" required>
                         <p v-for="(error, index) in errors.name" :key="index" class="text-danger">
                             {{ error }}
                         </p>
@@ -241,7 +241,7 @@ export default {
                     <!-- email -->
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
-                        <input type="email" class="form-control form-box-shadow" id="email" placeholder="name@example.com" name="email" v-model="email">
+                        <input type="email" class="form-control form-box-shadow" id="email" placeholder="name@example.com" name="email" v-model="email" required>
                         <p v-for="(error, index) in errors.email" :key="index" class="text-danger">
                             {{ error }}
                         </p>
@@ -251,7 +251,7 @@ export default {
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="" class="form-label">Messaggio</label>
-                            <textarea class="form-control form-box-shadow" id="content" rows="3" name="content" v-model="content"></textarea>
+                            <textarea class="form-control form-box-shadow" id="content" rows="3" name="content" v-model="content" required></textarea>
                             <p v-for="(error, index) in errors.content" :key="index" class="text-danger">
                                 {{ error }}
                             </p>
